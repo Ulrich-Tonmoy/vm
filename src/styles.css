@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Argon";
+  src: url("/fonts/MonaspaceArgonVarVF[wght,wdth,slnt].ttf") format("truetype");
+}
+@font-face {
+  font-family: "Krypton";
+  src: url("/fonts/MonaspaceKryptonVarVF[wght,wdth,slnt].ttf") format("truetype");
+}
+@font-face {
+  font-family: "Neon";
+  src: url("/fonts/MonaspaceNeonVarVF[wght,wdth,slnt].ttf") format("truetype");
+}
+@font-face {
+  font-family: "Radon";
+  src: url("/fonts/MonaspaceRadonVarVF[wght,wdth,slnt].ttf") format("truetype");
+}
+@font-face {
+  font-family: "Xenon";
+  src: url("/fonts/MonaspaceXenonVarVF[wght,wdth,slnt].ttf") format("truetype");
+}
+
+#root {
+  @apply h-full;
+}
+
+html,
+body {
+  @apply h-full;
+  @apply select-none;
+  @apply bg-transparent;
+  @apply font-Krypton antialiased text-white;
+  @apply overflow-hidden;
+  @apply bg-slate-700;
+}
+
+button {
+  -webkit-app-region: no-drag;
+}
+
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-md bg-slate-800;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-black;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
