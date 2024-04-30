@@ -1,7 +1,7 @@
-import { ToolListType } from "../enums";
+import { ToolType } from "../enums";
 
 export interface ToolList {
   name: string;
   icon: string;
-  type: ToolListType;
+  type: ToolType;
 }

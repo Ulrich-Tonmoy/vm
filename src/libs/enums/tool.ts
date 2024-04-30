@@ -1,4 +1,5 @@
-export enum ToolListType {
+export enum ToolType {
+  NULL = "Null",
   NODE = "Node JS",
   BUN = "Bun",
   DENO = "Deno",

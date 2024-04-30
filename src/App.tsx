@@ -1,6 +1,15 @@
 import { ContentBody, ContentLayout, RootLayout, Sidebar } from "@/components";
+import { useSetAtom } from "jotai";
+import { loadConfigAtom } from "@/store";
+import { useEffect } from "react";
 
 function App() {
+  const loadConfig = useSetAtom(loadConfigAtom);
+
+  useEffect(() => {
+    loadConfig();
+  }, []);
+
   return (
     <>
       <RootLayout>
