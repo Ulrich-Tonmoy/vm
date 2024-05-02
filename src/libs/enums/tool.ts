@@ -1,6 +1,5 @@
 export enum ToolType {
-  NULL = "Null",
-  NODE = "Node JS",
+  NODE = "Node",
   BUN = "Bun",
   DENO = "Deno",
   ZIG = "Zig",

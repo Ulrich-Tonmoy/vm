@@ -17,9 +17,12 @@ export const Sidebar = ({ className, children, ...props }: ComponentProps<"aside
       {toolList.map((tool) => (
         <div
           key={tool.name}
-          className={cn("flex flex-row items-center p-2 hover:bg-slate-600", {
-            "bg-slate-900": tool.type === selectedTool,
-          })}
+          className={cn(
+            "flex flex-row items-center p-2 m-1 hover:bg-slate-600 rounded-md",
+            {
+              "bg-slate-900": tool.type === selectedTool,
+            },
+          )}
           onClick={() => updateSelectedTool(tool.type)}
         >
           <img src={tool.icon} alt={tool.name} className="w-6 h-6 mr-2" />

@@ -1,13 +1,13 @@
 export interface ConfigModel {
-  Node: GeneralObject;
-  Bun: GeneralObject;
-  Deno: GeneralObject;
-  Zig: GeneralObject;
-  Python: GeneralObject;
-  Godot: GeneralObject;
+  Node: ConfigGeneralObject;
+  Bun: ConfigGeneralObject;
+  Deno: ConfigGeneralObject;
+  Zig: ConfigGeneralObject;
+  Python: ConfigGeneralObject;
+  Godot: ConfigGeneralObject;
 }
 
-interface GeneralObject {
+export interface ConfigGeneralObject {
   active: string;
   installed: [name: string] | [];
 }

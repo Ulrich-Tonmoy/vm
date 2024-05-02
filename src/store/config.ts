@@ -23,7 +23,7 @@ export const updateConfigAtom = atom(null, async (_get, set, config: ConfigModel
 });
 
 export const loadConfigAtom = atom(null, async (_, set) => {
-  const dirPath = await dataDirPath();
+  const dirPath = (await dataDirPath()) + "/" + CONFIG_FILE_NAME;
   readFile(dirPath).then((res: string) => {
     if (res !== "ERROR") {
       let config: ConfigModel = JSON.parse(res);
