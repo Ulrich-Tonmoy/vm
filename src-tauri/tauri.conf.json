@@ -22,6 +22,10 @@
       "fs": {
         "all": true,
         "scope": ["**"]
+      },
+      "http": {
+        "all": true,
+        "scope": ["https://**"]
       }
     },
     "windows": [
