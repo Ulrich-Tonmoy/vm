@@ -7,23 +7,42 @@ interface InstalledProps {
 
 export const Installed = ({ active, installed }: InstalledProps) => {
   const notify = () => {
-    const rand = Math.floor(Math.random() * 4);
+    const rand = Math.floor(Math.random() * 5);
 
     switch (rand) {
       case 0:
-        toast.success("Successfully installed!");
+        toast.success("Success!");
         break;
       case 1:
-        toast.error("Successfully installed!");
+        toast.error("Error!");
         break;
       case 2:
-        toast.warn("Successfully installed!");
+        toast.warn("Warn!");
         break;
       case 3:
-        toast.info("Successfully installed!");
+        toast.info("Info!");
+        break;
+      case 4:
+        const resolveAfter3Sec = new Promise((resolve) => setTimeout(resolve, 3000));
+        toast.promise(resolveAfter3Sec, {
+          pending: "Promise is pending",
+          success: "Promise resolved 👌",
+          error: "Promise rejected 🤯",
+        });
+        break;
+      default:
+        const resolveAfter4Sec = new Promise((_resolve, reject) =>
+          setTimeout(reject, 4000),
+        );
+        toast.promise(resolveAfter4Sec, {
+          pending: "Promise is pending",
+          success: "Promise resolved 👌",
+          error: "Promise rejected 🤯",
+        });
         break;
     }
   };
+
   return (
     <div className="flex flex-col items-center md:items-start">
       <div className="mb-4 text-xl font-black">Installed</div>
