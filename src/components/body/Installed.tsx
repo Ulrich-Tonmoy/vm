@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { NotificationType, showNotification } from "@/libs";
 
 interface InstalledProps {
   active: string;
@@ -6,43 +6,6 @@ interface InstalledProps {
 }
 
 export const Installed = ({ active, installed }: InstalledProps) => {
-  const notify = () => {
-    const rand = Math.floor(Math.random() * 5);
-
-    switch (rand) {
-      case 0:
-        toast.success("Success!");
-        break;
-      case 1:
-        toast.error("Error!");
-        break;
-      case 2:
-        toast.warn("Warn!");
-        break;
-      case 3:
-        toast.info("Info!");
-        break;
-      case 4:
-        const resolveAfter3Sec = new Promise((resolve) => setTimeout(resolve, 3000));
-        toast.promise(resolveAfter3Sec, {
-          pending: "Promise is pending",
-          success: "Promise resolved 👌",
-          error: "Promise rejected 🤯",
-        });
-        break;
-      default:
-        const resolveAfter4Sec = new Promise((_resolve, reject) =>
-          setTimeout(reject, 4000),
-        );
-        toast.promise(resolveAfter4Sec, {
-          pending: "Promise is pending",
-          success: "Promise resolved 👌",
-          error: "Promise rejected 🤯",
-        });
-        break;
-    }
-  };
-
   return (
     <div className="flex flex-col items-center md:items-start">
       <div className="mb-4 text-xl font-black">Installed</div>
@@ -53,10 +16,7 @@ export const Installed = ({ active, installed }: InstalledProps) => {
             {active === i ? (
               <span className="ml-2 text-green-400">(Active)</span>
             ) : (
-              <button
-                className="p-1 ml-2 rounded-md hover:bg-slate-600 bg-slate-900"
-                onClick={notify}
-              >
+              <button className="p-1 ml-2 rounded-md hover:bg-slate-600 bg-slate-900">
                 Use
               </button>
             )}
