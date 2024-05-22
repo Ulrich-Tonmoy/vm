@@ -1,21 +1,27 @@
-import { selectedToolAtom } from "@/store";
-import { ResponseType, fetch } from "@tauri-apps/api/http";
-import { useAtomValue } from "jotai";
+import { getNodeAtom, loadNodeAtom, selectedToolAtom } from "@/store";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
+import { NodeVersionDataModel } from "@/libs";
 
 export const Available = () => {
+  const loadNodeVList = useSetAtom(loadNodeAtom);
+  const getNode = useSetAtom(getNodeAtom);
+
+  const [ltsVersions, setLtsVersions] = useState<NodeVersionDataModel[]>([]);
+  const [currentVersions, setCurrentVersions] = useState<NodeVersionDataModel[]>([]);
+  const [stableVersions, setStableVersions] = useState<NodeVersionDataModel[]>([]);
+  const [unStableVersions, setUnStableVersions] = useState<NodeVersionDataModel[]>([]);
   const selectedTool = useAtomValue(selectedToolAtom);
 
   useEffect(() => {
-    fetch(`https://nodejs.org/dist/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      responseType: ResponseType.Text,
-    }).then((res) => {
-      console.log(res.data);
-    });
+    (async () => {
+      await loadNodeVList();
+      const res = await getNode();
+      setLtsVersions(res.lts);
+      setCurrentVersions(res.current);
+      setStableVersions(res.stable);
+      setUnStableVersions(res.unstable);
+    })();
   }, []);
 
   return (
@@ -25,30 +31,47 @@ export const Available = () => {
       <div className="flex justify-between gap-4">
         <div className="flex flex-col items-center space-y-2">
           <div className="font-black">Current</div>
-          <div>
-            Current
-            <button className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900">
-              Install
-            </button>
-          </div>
+          {currentVersions.map((v, i) => (
+            <div key={i}>
+              {v.version}
+              <button className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900">
+                Install
+              </button>
+            </div>
+          ))}
         </div>
         <div className="flex flex-col items-center space-y-2">
           <div className="font-black">LTS</div>
-          <div>
-            LTS
-            <button className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900">
-              Install
-            </button>
-          </div>
+          {ltsVersions.map((v, i) => (
+            <div key={i}>
+              {v.version}
+              <button className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900">
+                Install
+              </button>
+            </div>
+          ))}
         </div>
         <div className="flex flex-col items-center space-y-2">
-          <div className="font-black">Old</div>
-          <div>
-            Old
-            <button className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900">
-              Install
-            </button>
-          </div>
+          <div className="font-black">Old Stable</div>
+          {stableVersions.map((v, i) => (
+            <div key={i}>
+              {v.version}
+              <button className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900">
+                Install
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col items-center space-y-2">
+          <div className="font-black">Old UnStable</div>
+          {unStableVersions.map((v, i) => (
+            <div key={i}>
+              {v.version}
+              <button className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900">
+                Install
+              </button>
+            </div>
+          ))}
         </div>
       </div>
     </div>
