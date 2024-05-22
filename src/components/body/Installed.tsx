@@ -16,9 +16,14 @@ export const Installed = ({ active, installed }: InstalledProps) => {
             {active === i ? (
               <span className="ml-2 text-green-400">(Active)</span>
             ) : (
-              <button className="p-1 ml-2 rounded-md hover:bg-slate-600 bg-slate-900">
-                Use
-              </button>
+              <>
+                <button className="p-1 ml-2 rounded-md hover:bg-slate-600 bg-slate-900">
+                  Use
+                </button>
+                <button className="p-1 ml-2 rounded-md hover:bg-rose-900 bg-rose-500">
+                  Uninstall
+                </button>
+              </>
             )}
           </div>
         ))}
