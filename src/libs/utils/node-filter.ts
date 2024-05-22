@@ -1,17 +1,5 @@
 import { NodeVersionDataModel } from "../models";
 
-export const isLTS = (element: NodeVersionDataModel): boolean => {
-  const lts = element.lts;
-  switch (typeof lts) {
-    case "boolean":
-      return lts;
-    case "string":
-      return true;
-    default:
-      return false;
-  }
-};
-
 export const parseVersion = (
   versionStr: string,
 ): { major: number; minor: number; patch: number } | null => {
@@ -24,6 +12,18 @@ export const parseVersion = (
     minor: parseInt(match[2], 10),
     patch: parseInt(match[3], 10),
   };
+};
+
+export const isLTS = (element: NodeVersionDataModel): boolean => {
+  const lts = element.lts;
+  switch (typeof lts) {
+    case "boolean":
+      return lts;
+    case "string":
+      return true;
+    default:
+      return false;
+  }
 };
 
 export const isCurrent = (element: NodeVersionDataModel): boolean => {
