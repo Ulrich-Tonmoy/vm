@@ -1,22 +1,26 @@
-import { getNodeAtom, loadNodeAtom, selectedToolAtom } from "@/store";
+import {
+  getNodeVersionCategoryAtom,
+  loadNodeVersionAtom,
+  selectedToolAtom,
+} from "@/store";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { NodeVersionDataModel } from "@/libs";
+import { NodeVersionListModel } from "@/libs";
 
 export const Available = () => {
-  const loadNodeVList = useSetAtom(loadNodeAtom);
-  const getNode = useSetAtom(getNodeAtom);
+  const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
+  const getNodeVersionCategory = useSetAtom(getNodeVersionCategoryAtom);
 
-  const [ltsVersions, setLtsVersions] = useState<NodeVersionDataModel[]>([]);
-  const [currentVersions, setCurrentVersions] = useState<NodeVersionDataModel[]>([]);
-  const [stableVersions, setStableVersions] = useState<NodeVersionDataModel[]>([]);
-  const [unStableVersions, setUnStableVersions] = useState<NodeVersionDataModel[]>([]);
+  const [ltsVersions, setLtsVersions] = useState<NodeVersionListModel[]>([]);
+  const [currentVersions, setCurrentVersions] = useState<NodeVersionListModel[]>([]);
+  const [stableVersions, setStableVersions] = useState<NodeVersionListModel[]>([]);
+  const [unStableVersions, setUnStableVersions] = useState<NodeVersionListModel[]>([]);
   const selectedTool = useAtomValue(selectedToolAtom);
 
   useEffect(() => {
     (async () => {
-      await loadNodeVList();
-      const res = await getNode();
+      await loadNodeVersion();
+      const res = await getNodeVersionCategory();
       setLtsVersions(res.lts);
       setCurrentVersions(res.current);
       setStableVersions(res.stable);

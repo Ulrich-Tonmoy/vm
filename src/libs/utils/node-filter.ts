@@ -1,4 +1,4 @@
-import { NodeVersionDataModel } from "../models";
+import { NodeVersionListModel } from "../models";
 
 export const parseVersion = (
   versionStr: string,
@@ -14,7 +14,7 @@ export const parseVersion = (
   };
 };
 
-export const isLTS = (element: NodeVersionDataModel): boolean => {
+export const isLTS = (element: NodeVersionListModel): boolean => {
   const lts = element.lts;
   switch (typeof lts) {
     case "boolean":
@@ -26,7 +26,7 @@ export const isLTS = (element: NodeVersionDataModel): boolean => {
   }
 };
 
-export const isCurrent = (element: NodeVersionDataModel): boolean => {
+export const isCurrent = (element: NodeVersionListModel): boolean => {
   if (isLTS(element)) {
     return false;
   }
@@ -51,7 +51,7 @@ export const isCurrent = (element: NodeVersionDataModel): boolean => {
   return true;
 };
 
-export const isStable = (element: NodeVersionDataModel): boolean => {
+export const isStable = (element: NodeVersionListModel): boolean => {
   if (isCurrent(element)) {
     return false;
   }
@@ -68,7 +68,7 @@ export const isStable = (element: NodeVersionDataModel): boolean => {
   return version.minor % 2 === 0;
 };
 
-export const isUnstable = (element: NodeVersionDataModel): boolean => {
+export const isUnstable = (element: NodeVersionListModel): boolean => {
   if (isStable(element)) {
     return false;
   }

@@ -2,9 +2,9 @@ import { ResponseType, fetch } from "@tauri-apps/api/http";
 import { showNotification } from "../utils";
 import { NotificationType } from "../enums";
 import { NODE_BASE_URL } from "../constants";
-import { NodeVersionDataModel } from "../models";
+import { NodeVersionListModel } from "../models";
 
-export const fetchNodeVersions = async (): Promise<NodeVersionDataModel[]> => {
+export const fetchNodeVersionList = async (): Promise<NodeVersionListModel[]> => {
   const response = await fetch(`${NODE_BASE_URL}index.json`, {
     method: "GET",
     headers: {
@@ -22,7 +22,7 @@ export const fetchNodeVersions = async (): Promise<NodeVersionDataModel[]> => {
       type: NotificationType.SUCCESS,
     });
 
-    return resJson.data as NodeVersionDataModel[];
+    return resJson.data as NodeVersionListModel[];
   } else {
     showNotification({
       msg: "Failed to fetch the Node Version List❌",

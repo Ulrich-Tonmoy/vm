@@ -1,4 +1,4 @@
-export interface NodeVersionDataModel {
+export interface NodeVersionListModel {
   version: string;
   dater: string;
   filses: Array<string>;
