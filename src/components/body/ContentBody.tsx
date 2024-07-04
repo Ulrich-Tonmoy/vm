@@ -5,7 +5,7 @@ import { Installed, Available } from "./";
 export const ContentBody = () => {
   const selectedTool = useAtomValue(selectedToolAtom);
   const config = useAtomValue(configAtom);
-  const selectedConfig = config[selectedTool];
+  const selectedConfig = config[selectedTool ?? "Node"];
 
   if (!selectedTool) return;
 

@@ -34,7 +34,7 @@
         "width": 800,
         "height": 600,
         "center": true,
-        "minWidth": 500,
+        "minWidth": 580,
         "minHeight": 350,
         "resizable": true,
         "decorations": true,

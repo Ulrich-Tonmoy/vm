@@ -1,6 +1,6 @@
 import { ConfigModel } from "../models";
 
-export const CONFIG_FOLDER_NAME = `vm`;
+export const CONFIG_FOLDER_NAME = `Version Manager`;
 export const CONFIG_FILE_NAME = `config.json`;
 export const INITIAL_CONFIG: ConfigModel = {
   Node: {
