@@ -12,8 +12,5 @@ vm/
 ├── node/
 ├── bun/
 ├── deno/
-├── zig/
-├── python/
-├── godot/
 └── config.json
 ```

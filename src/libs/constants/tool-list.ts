@@ -16,19 +16,4 @@ export const toolList = [
     icon: "/deno.png",
     type: ToolType.DENO,
   },
-  {
-    name: "Zig",
-    icon: "/zig.png",
-    type: ToolType.ZIG,
-  },
-  {
-    name: "Python",
-    icon: "/python.png",
-    type: ToolType.PYTHON,
-  },
-  {
-    name: "Godot",
-    icon: "/godot.png",
-    type: ToolType.GODOT,
-  },
 ];

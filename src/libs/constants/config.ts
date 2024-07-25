@@ -15,16 +15,4 @@ export const INITIAL_CONFIG: ConfigModel = {
     active: "",
     installed: [],
   },
-  Zig: {
-    active: "",
-    installed: [],
-  },
-  Python: {
-    active: "",
-    installed: [],
-  },
-  Godot: {
-    active: "",
-    installed: [],
-  },
 };

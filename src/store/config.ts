@@ -31,9 +31,6 @@ export const loadConfigAtom = atom(null, async (_, set) => {
         Node: config.Node ?? INITIAL_CONFIG.Node,
         Bun: config.Bun ?? INITIAL_CONFIG.Bun,
         Deno: config.Deno ?? INITIAL_CONFIG.Deno,
-        Zig: config.Zig ?? INITIAL_CONFIG.Zig,
-        Python: config.Python ?? INITIAL_CONFIG.Python,
-        Godot: config.Godot ?? INITIAL_CONFIG.Godot,
       };
       set(configAtom, config);
     }
