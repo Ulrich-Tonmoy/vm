@@ -29,7 +29,7 @@ export const Available = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center mt-5">
       <title>{selectedTool}</title>
       <div className="mb-4 text-xl font-black">Available For Installation</div>
       <div className="flex justify-between gap-4">

@@ -1,5 +1,3 @@
-import { NotificationType, showNotification } from "@/libs";
-
 interface InstalledProps {
   active: string;
   installed: string[];
@@ -7,9 +5,9 @@ interface InstalledProps {
 
 export const Installed = ({ active, installed }: InstalledProps) => {
   return (
-    <div className="flex flex-col items-center md:items-start">
+    <div className="flex flex-col items-center p-4">
       <div className="mb-4 text-xl font-black">Installed</div>
-      <div className="ml-8 space-y-2 md:m-0">
+      <div className="flex flex-wrap items-center justify-center gap-2 ml-8 space-y-2 md:m-0">
         {installed.map((i) => (
           <div key={i}>
             {i}

@@ -19,7 +19,7 @@ export const ContentBody = () => {
           placeholder="Search"
         />
       </div>
-      <div className="flex flex-col justify-around h-full px-2 md:flex-row">
+      <div className="flex flex-col items-center justify-around h-full px-2">
         <Installed active={selectedConfig.active} installed={selectedConfig.installed} />
         <Available />
       </div>
