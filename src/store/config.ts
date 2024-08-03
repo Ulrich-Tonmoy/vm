@@ -1,17 +1,12 @@
 import {
   CONFIG_FILE_NAME,
-  CONFIG_FOLDER_NAME,
   ConfigModel,
+  dataDirPath,
   INITIAL_CONFIG,
   readFile,
   writeFile,
 } from "@/libs";
-import { dataDir } from "@tauri-apps/api/path";
 import { atom } from "jotai";
-
-const dataDirPath = async () => {
-  return (await dataDir()) + CONFIG_FOLDER_NAME;
-};
 
 export const configAtom = atom<ConfigModel>(INITIAL_CONFIG);
 

@@ -1,4 +1,4 @@
-import { FileSysRes } from "@/libs";
+import { FileSysRes, CONFIG_FOLDER_NAME } from "@/libs";
 import {
   createDir,
   exists,
@@ -10,8 +10,18 @@ import {
 } from "@tauri-apps/api/fs";
 import { ask } from "@tauri-apps/api/dialog";
 import { basename } from "@tauri-apps/api/path";
+import { dataDir } from "@tauri-apps/api/path";
+
+export const dataDirPath = async () => {
+  return (await dataDir()) + CONFIG_FOLDER_NAME;
+};
 
 export const readFile = async (filePath: string): Promise<string> => {
+  const fileExist = await exists(filePath);
+  if (!fileExist) {
+    return FileSysRes.ERROR;
+  }
+
   const contents = await readTextFile(filePath);
   return contents;
 };
@@ -26,6 +36,22 @@ export const writeFile = async (
     await createFolder(folderPath);
   }
   await writeTextFile(folderPath + "/" + fileName, content);
+  return FileSysRes.OK;
+};
+
+export const deleteFile = async (filePath: string): Promise<string> => {
+  const fileName = await basename(filePath);
+
+  const confirmed = await ask(
+    `Are you sure you want to delete '${fileName}'?\nThis action cannot be reverted.`,
+    {
+      title: `Are you sure you want to delete '${fileName}'?`,
+      type: "warning",
+    },
+  );
+
+  if (!confirmed) return FileSysRes.CANCEL;
+  await removeFile(filePath);
   return FileSysRes.OK;
 };
 
@@ -47,22 +73,6 @@ export const deleteFolder = async (dirPath: string): Promise<string> => {
 
   if (!confirmed) return FileSysRes.CANCEL;
   await removeDir(dirPath, { recursive: true });
-  return FileSysRes.OK;
-};
-
-export const deleteFile = async (filePath: string): Promise<string> => {
-  const fileName = await basename(filePath);
-
-  const confirmed = await ask(
-    `Are you sure you want to delete '${fileName}'?\nThis action cannot be reverted.`,
-    {
-      title: `Are you sure you want to delete '${fileName}'?`,
-      type: "warning",
-    },
-  );
-
-  if (!confirmed) return FileSysRes.CANCEL;
-  await removeFile(filePath);
   return FileSysRes.OK;
 };
 

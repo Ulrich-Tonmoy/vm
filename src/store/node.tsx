@@ -1,10 +1,10 @@
 import {
   NodeVersionListModel,
-  fetchNodeVersionList,
   isCurrent,
   isLTS,
   isStable,
   isUnstable,
+  loadNodeVersionList,
 } from "@/libs";
 import { atom } from "jotai";
 
@@ -14,27 +14,30 @@ export const nodeCurrentVersionAtom = atom<NodeVersionListModel[] | []>([]);
 export const nodeStableVersionAtom = atom<NodeVersionListModel[] | []>([]);
 export const nodeUnStableVersionAtom = atom<NodeVersionListModel[] | []>([]);
 
-export const loadNodeVersionAtom = atom(null, async (_, set) => {
-  const all = await fetchNodeVersionList();
-  let lts: NodeVersionListModel[] | [] = [];
-  let current: NodeVersionListModel[] | [] = [];
-  let stable: NodeVersionListModel[] | [] = [];
-  let unstable: NodeVersionListModel[] | [] = [];
+export const loadNodeVersionAtom = atom(
+  null,
+  async (_, set, isRefresh: boolean = false) => {
+    const all = await loadNodeVersionList(isRefresh);
+    let lts: NodeVersionListModel[] | [] = [];
+    let current: NodeVersionListModel[] | [] = [];
+    let stable: NodeVersionListModel[] | [] = [];
+    let unstable: NodeVersionListModel[] | [] = [];
 
-  set(nodeAllVersionAtom, all);
+    set(nodeAllVersionAtom, all);
 
-  if (all.length > 0) {
-    lts = all.filter((data: NodeVersionListModel) => isLTS(data));
-    current = all.filter((data: NodeVersionListModel) => isCurrent(data));
-    stable = all.filter((data: NodeVersionListModel) => isStable(data));
-    unstable = all.filter((data: NodeVersionListModel) => isUnstable(data));
+    if (all.length > 0) {
+      lts = all.filter((data: NodeVersionListModel) => isLTS(data));
+      current = all.filter((data: NodeVersionListModel) => isCurrent(data));
+      stable = all.filter((data: NodeVersionListModel) => isStable(data));
+      unstable = all.filter((data: NodeVersionListModel) => isUnstable(data));
 
-    set(nodeLtsVersionAtom, lts);
-    set(nodeCurrentVersionAtom, current);
-    set(nodeStableVersionAtom, stable);
-    set(nodeUnStableVersionAtom, unstable);
-  }
-});
+      set(nodeLtsVersionAtom, lts);
+      set(nodeCurrentVersionAtom, current);
+      set(nodeStableVersionAtom, stable);
+      set(nodeUnStableVersionAtom, unstable);
+    }
+  },
+);
 
 export const getNodeVersionCategoryAtom = atom(null, (get, _set) => {
   const all = get(nodeAllVersionAtom);

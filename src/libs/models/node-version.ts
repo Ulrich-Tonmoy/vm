@@ -11,3 +11,10 @@ export interface NodeVersionListModel {
   lts: boolean | string;
   security: boolean;
 }
+
+export interface NodeFilterVersionModel {
+  lts: NodeVersionListModel[];
+  current: NodeVersionListModel[];
+  stable: NodeVersionListModel[];
+  unstable: NodeVersionListModel[];
+}
