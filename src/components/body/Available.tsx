@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { NodeFilterVersionModel, NodeVersionListModel } from "@/libs";
 import { MdInstallDesktop } from "react-icons/md";
 import { RiRefreshFill } from "react-icons/ri";
+import { List } from "./List";
 
 export const Available = () => {
   const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
@@ -56,74 +57,10 @@ export const Available = () => {
         </button>
       </div>
       <div className="flex justify-between gap-4">
-        <div className="flex flex-col items-center space-y-2">
-          <div className="p-1 px-2 text-sm font-black rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30">
-            Current
-          </div>
-          {currentVersions.map((v, i) => (
-            <div
-              key={i}
-              className="flex flex-wrap items-center justify-center p-1 px-2 text-sm rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30"
-            >
-              {v.version}
-              <MdInstallDesktop
-                className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900 size-8"
-                title="Install"
-              />
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-col items-center space-y-2">
-          <div className="p-1 px-2 text-sm font-black rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-green-500/70 ">
-            LTS
-          </div>
-          {ltsVersions.map((v, i) => (
-            <div
-              key={i}
-              className="flex flex-wrap items-center justify-center p-1 px-2 text-sm rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30"
-            >
-              {v.version}
-              <MdInstallDesktop
-                className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900 size-8"
-                title="Install"
-              />
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-col items-center space-y-2">
-          <div className="p-1 px-2 text-sm font-black rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30">
-            Old Stable
-          </div>
-          {stableVersions.map((v, i) => (
-            <div
-              key={i}
-              className="flex flex-wrap items-center justify-center p-1 px-2 text-sm rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30"
-            >
-              {v.version}
-              <MdInstallDesktop
-                className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900 size-8"
-                title="Install"
-              />
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-col items-center space-y-2">
-          <div className="p-1 px-2 text-sm font-black rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30">
-            Old UnStable
-          </div>
-          {unStableVersions.map((v, i) => (
-            <div
-              key={i}
-              className="flex flex-wrap items-center justify-center p-1 px-2 text-sm rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30"
-            >
-              {v.version}
-              <MdInstallDesktop
-                className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900 size-8"
-                title="Install"
-              />
-            </div>
-          ))}
-        </div>
+        <List key={"Current"} name="Current" list={currentVersions} />
+        <List key={"LTS"} name="LTS" list={ltsVersions} />
+        <List key={"Old Stable"} name="Old Stable" list={stableVersions} />
+        <List key={"Old UnStable"} name="Old UnStable" list={unStableVersions} />
       </div>
     </div>
   );
