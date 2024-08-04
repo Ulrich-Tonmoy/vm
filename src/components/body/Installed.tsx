@@ -9,7 +9,7 @@ interface InstalledProps {
 export const Installed = ({ active, installed }: InstalledProps) => {
   return (
     <div className="flex flex-col items-center p-4">
-      <div className="p-1 px-2 mb-4 text-xl font-black rounded-md shadow-xl md:text-4xl backdrop-blur-sm bg-slate-400/30">
+      <div className="p-1 px-2 mb-4 text-xl font-black rounded-md shadow-xl lg:text-4xl backdrop-blur-sm bg-slate-400/30">
         Installed
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2 ml-8 md:m-0">
@@ -20,17 +20,23 @@ export const Installed = ({ active, installed }: InstalledProps) => {
           >
             {i}
             {active === i ? (
-              <ImCheckboxChecked className="ml-2 text-green-400 size-6" title="Active" />
+              <button className="ml-2 text-green-400 size-6" title="Active">
+                <ImCheckboxChecked />
+              </button>
             ) : (
               <>
-                <ImCheckboxChecked
+                <button
                   className="ml-2 cursor-pointer bg-slate-500 hover:text-slate-600 text-slate-900 size-6"
                   title="Use"
-                />
-                <RiUninstallFill
+                >
+                  <ImCheckboxChecked />
+                </button>
+                <button
                   className="ml-2 cursor-pointer hover:text-rose-900 text-rose-500 size-6"
                   title="Uninstall"
-                />
+                >
+                  <RiUninstallFill />
+                </button>
               </>
             )}
           </div>

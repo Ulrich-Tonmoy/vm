@@ -45,11 +45,11 @@ export const Available = () => {
     <div className="flex flex-col items-center justify-center mt-5">
       <title>{selectedTool}</title>
       <div className="flex gap-1">
-        <div className="p-1 px-2 mb-4 text-xl font-black rounded-md shadow-xl md:text-4xl backdrop-blur-sm bg-slate-400/30">
+        <div className="p-1 px-2 mb-4 text-xl font-black rounded-md shadow-xl lg:text-4xl backdrop-blur-sm bg-slate-400/30">
           Available For Installation
         </div>
         <button
-          className="p-1 px-2 mb-4 text-xl font-black rounded-md shadow-xl md:text-4xl backdrop-blur-sm bg-slate-400/30 hover:bg-slate-500/30"
+          className="p-1 px-2 mb-4 text-xl font-black rounded-md shadow-xl lg:text-4xl backdrop-blur-sm bg-slate-400/30 hover:bg-slate-500/30"
           title="Refresh The list"
           onClick={() => refreshNodeVersion()}
         >
