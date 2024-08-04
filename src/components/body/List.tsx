@@ -15,23 +15,20 @@ export const List = ({ name, list }: ListProps) => {
       <div className="p-1 px-2 text-sm font-black rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30">
         {name}
       </div>
-      {list.map(
-        (v, i) =>
-          i < limit && (
-            <div
-              key={i}
-              className="flex flex-wrap items-center justify-center p-1 px-2 text-sm rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30"
-            >
-              {v.version}
-              <button
-                className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900 size-8"
-                title="Install"
-              >
-                <MdInstallDesktop />
-              </button>
-            </div>
-          ),
-      )}
+      {list.slice(0, limit).map((v, i) => (
+        <div
+          key={i}
+          className="flex flex-wrap items-center justify-center p-1 px-2 text-sm rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30"
+        >
+          {v.version}
+          <button
+            className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900 size-8"
+            title="Install"
+          >
+            <MdInstallDesktop />
+          </button>
+        </div>
+      ))}
       {limit !== list.length && (
         <button
           className="flex items-center justify-center rounded-md hover:bg-slate-600 bg-slate-900"
