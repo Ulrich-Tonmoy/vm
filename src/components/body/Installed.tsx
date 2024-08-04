@@ -33,9 +33,9 @@ export const Installed = () => {
               >
                 {i}
                 {selectedConfig.active === i ? (
-                  <button className="ml-2 text-green-400" title="Active">
+                  <span className="ml-2 text-green-400" title="Active">
                     <ImCheckboxChecked className="size-6" />
-                  </button>
+                  </span>
                 ) : (
                   <>
                     <button
