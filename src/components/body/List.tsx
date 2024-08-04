@@ -29,10 +29,10 @@ export const List = ({ name, list }: ListProps) => {
         >
           {v.version}
           <button
-            className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900 size-8"
+            className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900"
             title="Install"
           >
-            <MdInstallDesktop />
+            <MdInstallDesktop className="size-5 lg:size-8" />
           </button>
         </div>
       ))}

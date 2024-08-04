@@ -26,22 +26,22 @@ export const Installed = ({ active, installed }: InstalledProps) => {
             >
               {i}
               {active === i ? (
-                <button className="ml-2 text-green-400 size-6" title="Active">
-                  <ImCheckboxChecked />
+                <button className="ml-2 text-green-400" title="Active">
+                  <ImCheckboxChecked className="size-6" />
                 </button>
               ) : (
                 <>
                   <button
-                    className="ml-2 cursor-pointer bg-slate-500 hover:text-slate-600 text-slate-900 size-6"
+                    className="ml-2 cursor-pointer bg-slate-500 hover:text-slate-600 text-slate-900"
                     title="Use"
                   >
-                    <ImCheckboxChecked />
+                    <ImCheckboxChecked className="size-6" />
                   </button>
                   <button
-                    className="ml-2 cursor-pointer hover:text-rose-900 text-rose-500 size-6"
+                    className="ml-2 cursor-pointer hover:text-rose-900 text-rose-500"
                     title="Uninstall"
                   >
-                    <RiUninstallFill />
+                    <RiUninstallFill className="size-6" />
                   </button>
                 </>
               )}
