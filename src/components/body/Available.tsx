@@ -6,11 +6,14 @@ import {
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { NodeFilterVersionModel, NodeVersionListModel } from "@/libs";
-import { MdInstallDesktop } from "react-icons/md";
 import { RiRefreshFill } from "react-icons/ri";
 import { List } from "./List";
 
-export const Available = () => {
+interface AvailableProps {
+  installed: string[];
+}
+
+export const Available = ({ installed }: AvailableProps) => {
   const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
   const getNodeVersionCategory = useSetAtom(getNodeVersionCategoryAtom);
 
@@ -21,10 +24,11 @@ export const Available = () => {
   const selectedTool = useAtomValue(selectedToolAtom);
 
   const updateVersionStates = (res: NodeFilterVersionModel) => {
-    setLtsVersions(res.lts);
-    setCurrentVersions(res.current);
-    setStableVersions(res.stable);
-    setUnStableVersions(res.unstable);
+    const installedSet = new Set(installed);
+    setLtsVersions(res.lts.filter((v) => !installedSet.has(v.version)));
+    setCurrentVersions(res.current.filter((v) => !installedSet.has(v.version)));
+    setStableVersions(res.stable.filter((v) => !installedSet.has(v.version)));
+    setUnStableVersions(res.unstable.filter((v) => !installedSet.has(v.version)));
   };
 
   const refreshNodeVersion = async () => {

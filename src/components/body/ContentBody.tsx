@@ -1,13 +1,28 @@
-import { configAtom, selectedToolAtom } from "@/store";
-import { useAtomValue } from "jotai";
+import { configAtom, selectedToolAtom, updateSearchTermAtom } from "@/store";
+import { useAtomValue, useSetAtom } from "jotai";
 import { Installed, Available } from "./";
 import { FaSearch } from "react-icons/fa";
+import { useCallback } from "react";
+import { debounce } from "@/libs";
 
 export const ContentBody = () => {
   const selectedTool = useAtomValue(selectedToolAtom);
+  const updateSearchTerm = useSetAtom(updateSearchTermAtom);
   const config = useAtomValue(configAtom);
+
+  const debouncedSearch = useCallback(
+    debounce((value: string) => {
+      updateSearchTerm(value);
+    }, 500),
+    [],
+  );
+
   if (!selectedTool) return;
   const selectedConfig = config[selectedTool];
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSearch(event.target.value);
+  };
 
   return (
     <div className="flex flex-col pb-10 mb-16 space-y-4">
@@ -17,6 +32,7 @@ export const ContentBody = () => {
         </span>
         <div className="flex text-sm rounded-lg items-center bg-slate-600 w-[80vw] h-12">
           <input
+            onChange={handleSearchChange}
             type="text"
             className="w-full h-full px-2 text-lg text-white rounded-lg bg-slate-600 placeholder-slate-300 focus:outline-none"
             placeholder="Search version ie: 18.1"
@@ -26,7 +42,7 @@ export const ContentBody = () => {
       </div>
       <div className="flex flex-col items-center justify-around h-full px-2">
         <Installed active={selectedConfig.active} installed={selectedConfig.installed} />
-        <Available />
+        <Available installed={selectedConfig.installed} />
       </div>
     </div>
   );
