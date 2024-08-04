@@ -21,3 +21,5 @@ export const INITIAL_CONFIG: ConfigModel = {
     installed: [],
   },
 };
+
+export const LIST_LIMIT = 20;
