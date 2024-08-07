@@ -1,4 +1,4 @@
-import { ContentBody, ContentLayout, RootLayout, Sidebar, TitleBar } from "@/components";
+import { ContentBody, ContentLayout, RootLayout, TitleBar } from "@/components";
 import { useSetAtom } from "jotai";
 import { loadConfigAtom } from "@/store";
 import { useEffect } from "react";
@@ -18,7 +18,6 @@ function App() {
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <TitleBar />
         <RootLayout>
-          <Sidebar className="pr-1" />
           <ContentLayout className="border-l border-slate-800">
             <ContentBody />
           </ContentLayout>
