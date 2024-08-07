@@ -13,7 +13,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <main className="h-full overflow-hidden antialiased text-white select-none font-Krypton bg-slate-700">
       <RootLayout>
         <Sidebar className="pr-1" />
         <ContentLayout className="border-l border-slate-800">
@@ -32,7 +32,7 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-    </>
+    </main>
   );
 }
 
