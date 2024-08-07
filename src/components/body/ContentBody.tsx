@@ -25,13 +25,12 @@ export const ContentBody = () => {
   };
 
   return (
-    <div className="flex flex-col pb-10 mb-16 space-y-4">
+    <div className="flex flex-col pb-10 mt-1 mb-16 space-y-4">
       <div className="flex flex-col items-center justify-center gap-4">
         <div className="flex">
           <span className="p-1 px-3 m-1 mx-3 text-xl font-black rounded-md text-md lg:text-4xl backdrop-blur-sm bg-slate-400/30">
             {selectedTool} Version Manager
           </span>
-
           <Button
             variant="outline"
             size="icon"

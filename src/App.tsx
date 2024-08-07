@@ -1,4 +1,4 @@
-import { ContentBody, ContentLayout, RootLayout, Sidebar } from "@/components";
+import { ContentBody, ContentLayout, RootLayout, Sidebar, TitleBar } from "@/components";
 import { useSetAtom } from "jotai";
 import { loadConfigAtom } from "@/store";
 import { useEffect } from "react";
@@ -14,6 +14,7 @@ function App() {
 
   return (
     <main className="h-full overflow-hidden antialiased text-white select-none font-Krypton bg-slate-700">
+      <TitleBar />
       <RootLayout>
         <Sidebar className="pr-1" />
         <ContentLayout className="border-l border-slate-800">

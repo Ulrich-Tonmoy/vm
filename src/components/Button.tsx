@@ -8,8 +8,8 @@ import {
 import { ReactElement } from "react";
 
 interface ButtonProps {
-  variant: "default" | "link" | "destructive" | "outline" | "secondary" | "ghost";
-  size: "icon" | "default" | "sm" | "lg";
+  variant?: "default" | "link" | "destructive" | "outline" | "secondary" | "ghost";
+  size?: "icon" | "default" | "sm" | "lg";
   disabled?: boolean;
   content: ReactElement | string;
   tooltip: string;
