@@ -37,7 +37,7 @@ export const Installed = () => {
                     variant="ghost"
                     size="icon"
                     disabled
-                    content={<CheckIcon className="bg-green-400size-8" />}
+                    content={<CheckIcon className="bg-green-400 size-8" />}
                     tooltip="Active"
                     onClick={() => {}}
                   />

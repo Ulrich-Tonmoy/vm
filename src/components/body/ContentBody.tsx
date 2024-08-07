@@ -39,11 +39,11 @@ export const ContentBody = () => {
             onClick={() => updateSelectedTool(null)}
           />
         </div>
-        <div className="flex text-sm rounded-lg items-center bg-slate-600 w-[90%] lg:w-[80vw] h-12">
+        <div className="flex text-sm rounded-lg items-center bg-input w-[90%] lg:w-[80vw] h-12">
           <input
             onChange={handleSearchChange}
             type="text"
-            className="w-full h-full px-2 text-lg text-white rounded-lg bg-slate-600 placeholder-slate-300 focus:outline-none"
+            className="w-full h-full px-2 text-lg rounded-lg text-foreground bg-input placeholder-secondary-foreground focus:outline-none"
             placeholder="Search version ie: 18.1"
           />
           <MagnifyingGlassIcon className="right-0 mr-1 size-8" />

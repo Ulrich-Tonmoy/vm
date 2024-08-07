@@ -87,8 +87,8 @@ export const Available = () => {
           </div>
         ) : (
           <div className="flex flex-col">
-            <List key={"Current"} name="Current" list={currentVersions} />
             <List key={"LTS"} name="LTS" list={ltsVersions} />
+            <List key={"Current"} name="Current" list={currentVersions} />
             <List key={"Old Stable"} name="Old Stable" list={stableVersions} />
             <List key={"Old UnStable"} name="Old UnStable" list={unStableVersions} />
           </div>

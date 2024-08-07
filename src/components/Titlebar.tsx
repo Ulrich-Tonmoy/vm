@@ -1,13 +1,13 @@
 import { CopyIcon, Cross1Icon, MinusIcon, SquareIcon } from "@radix-ui/react-icons";
 import { appWindow } from "@tauri-apps/api/window";
 import { useState } from "react";
-import { Button } from "@/components/Button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ModeToggle } from "./ModeToggle";
 
 export const TitleBar = () => {
   const [isMaximized, setIsMaximized] = useState(false);
@@ -27,7 +27,7 @@ export const TitleBar = () => {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 flex items-center justify-between pl-1 bg-slate-900"
+      className="fixed top-0 left-0 right-0 flex items-center justify-between pl-1 bg-secondary"
       data-tauri-drag-region
     >
       <div className="flex items-center gap-1">
@@ -40,6 +40,7 @@ export const TitleBar = () => {
       </div>
       <div className="cursor-default text-text">JavaScript Version Manager</div>
       <div className="flex items-center">
+        <ModeToggle />
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>

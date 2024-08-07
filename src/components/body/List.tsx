@@ -19,7 +19,7 @@ export const List = ({ name, list }: ListProps) => {
   const collapse = newList.length === limit;
 
   return (
-    <div className="flex flex-col items-center mb-2 space-y-2">
+    <div className="flex flex-col items-center mb-4 space-y-3">
       <div className="p-1 px-2 text-sm font-black rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30">
         {name}
       </div>
