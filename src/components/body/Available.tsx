@@ -7,8 +7,8 @@ import {
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { NodeFilterVersionModel, NodeVersionListModel, ToolType } from "@/libs";
-import { RiRefreshFill } from "react-icons/ri";
 import { List } from "./List";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 export const Available = () => {
   const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
@@ -69,7 +69,7 @@ export const Available = () => {
           title="Refresh The list"
           onClick={() => refreshAvailableVersion(true)}
         >
-          <RiRefreshFill />
+          <ReloadIcon />
         </button>
       </div>
       <div className="flex justify-between gap-4">
@@ -85,12 +85,12 @@ export const Available = () => {
             <p>Try refreshing the list.</p>
           </div>
         ) : (
-          <>
+          <div className="flex flex-col">
             <List key={"Current"} name="Current" list={currentVersions} />
             <List key={"LTS"} name="LTS" list={ltsVersions} />
             <List key={"Old Stable"} name="Old Stable" list={stableVersions} />
             <List key={"Old UnStable"} name="Old UnStable" list={unStableVersions} />
-          </>
+          </div>
         )}
       </div>
     </div>
