@@ -1,4 +1,4 @@
-import { ContentBody, ContentLayout, RootLayout, TitleBar } from "@/components";
+import { ContentBody, ContentLayout, TitleBar } from "@/components";
 import { useSetAtom } from "jotai";
 import { loadConfigAtom } from "@/store";
 import { useEffect } from "react";
@@ -14,14 +14,12 @@ function App() {
   }, []);
 
   return (
-    <main className="h-full overflow-hidden antialiased select-none text-foreground font-Krypton bg-background">
+    <main className="h-full overflow-hidden antialiased select-none text-foreground font-Krypton bg-background rounded-lg">
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <TitleBar />
-        <RootLayout>
-          <ContentLayout className="border-l border-slate-800">
-            <ContentBody />
-          </ContentLayout>
-        </RootLayout>
+        <ContentLayout className="border-l border-slate-800">
+          <ContentBody />
+        </ContentLayout>
         <ToastContainer
           position="bottom-right"
           autoClose={5000}
