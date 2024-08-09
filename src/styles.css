@@ -25,47 +25,85 @@
 
 @layer base {
   :root {
+    /* #ffffff white */
     --background: 0 0% 100%;
+    /* #09090b black */
     --foreground: 240 10% 3.9%;
+    /* #ffffff white */
     --card: 0 0% 100%;
+    /* #09090b black */
     --card-foreground: 240 10% 3.9%;
+    /* #ffffff white */
     --popover: 0 0% 100%;
+    /* #09090b black */
     --popover-foreground: 240 10% 3.9%;
+    /* #21c45d green */
     --primary: 142.1 70.6% 45.3%;
+    /* #fff0f1 pinkish */
     --primary-foreground: 355.7 100% 97.3%;
+    /* #f4f4f5 grayish */
     --secondary: 240 4.8% 95.9%;
+    /* #18181b black */
     --secondary-foreground: 240 5.9% 10%;
+    /* #f4f4f5 grayish */
     --muted: 240 4.8% 95.9%;
+    /* #71717a black grayish */
     --muted-foreground: 240 3.8% 46.1%;
+    /* #f4f4f5 grayish */
     --accent: 240 4.8% 95.9%;
+    /* #18181b black */
     --accent-foreground: 240 5.9% 10%;
+    /* #ef4343 red */
     --destructive: 0 84.2% 60.2%;
+    /* #fafafa white */
     --destructive-foreground: 0 0% 98%;
+    /* #e4e4e7 white gray */
     --border: 240 5.9% 90%;
+    /* #e4e4e7 white gray */
     --input: 240 5.9% 90%;
+    /* #16a249 green */
     --ring: 142.1 76.2% 36.3%;
     --radius: 0.3rem;
   }
 
   .dark {
+    /* #0c0a09 black */
     --background: 20 14.3% 4.1%;
+    /* #f2f2f2 white */
     --foreground: 0 0% 95%;
+    /* #1c1917 black */
     --card: 24 9.8% 10%;
+    /* #f2f2f2 white */
     --card-foreground: 0 0% 95%;
+    /* #171717 black */
     --popover: 0 0% 9%;
+    /* #f2f2f2 white */
     --popover-foreground: 0 0% 95%;
+    /* #7c3bed violet */
     --primary: 262.1 83.3% 57.8%;
+    /* #f9fafb white */
     --primary-foreground: 210 20% 98%;
+    /* #27272a white */
     --secondary: 240 3.7% 15.9%;
+    /* #fafafa white */
     --secondary-foreground: 0 0% 98%;
+    /* #262626 black */
     --muted: 0 0% 15%;
+    /* #a1a1aa gray */
     --muted-foreground: 240 5% 64.9%;
+    /* #292524 black */
     --accent: 12 6.5% 15.1%;
+    /* #fafafa white */
     --accent-foreground: 0 0% 98%;
+    /* #811d1d red */
     --destructive: 0 62.8% 30.6%;
+    /* #fef1f1 redish white */
     --destructive-foreground: 0 85.7% 97.3%;
+    /* #27272a white */
     --border: 240 3.7% 15.9%;
+    /* #27272a white */
     --input: 240 3.7% 15.9%;
+    /* #157f3c green */
     --ring: 142.4 71.8% 29.2%;
     --radius: 0.3rem;
   }

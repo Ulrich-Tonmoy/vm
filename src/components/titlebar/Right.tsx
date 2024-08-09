@@ -27,12 +27,21 @@ export const Right = () => {
 
   return (
     <div className="flex items-center">
-      <ModeToggle />
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <ModeToggle />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Toggle Theme</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>
             <MinusIcon
-              className="px-2 py-0 my-0 text-center cursor-pointer size-8 hover:bg-gray-800"
+              className="px-2 py-0 my-0 text-center cursor-pointer size-8 hover:bg-border"
               onClick={onMinimize}
             />
           </TooltipTrigger>
@@ -46,7 +55,7 @@ export const Right = () => {
           <Tooltip>
             <TooltipTrigger>
               <SquareIcon
-                className="px-2 py-1 text-center cursor-pointer size-8 hover:bg-gray-800"
+                className="px-2 py-1 text-center cursor-pointer size-8 hover:bg-border"
                 onClick={onScaleDown}
               />
             </TooltipTrigger>
@@ -60,7 +69,7 @@ export const Right = () => {
           <Tooltip>
             <TooltipTrigger>
               <CopyIcon
-                className="px-2 py-1 text-center scale-x-[-1] cursor-pointer size-8 hover:bg-gray-800"
+                className="px-2 py-1 text-center scale-x-[-1] cursor-pointer size-8 hover:bg-border"
                 onClick={onScaleUp}
               />
             </TooltipTrigger>
