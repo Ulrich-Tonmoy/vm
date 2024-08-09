@@ -4,13 +4,21 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { cn, toolList } from "@/libs";
+import { cn, toolList, ToolType } from "@/libs";
 import { useAtomValue, useSetAtom } from "jotai";
 import { selectedToolAtom, updateSelectedToolAtom } from "@/store";
 
 export const Left = () => {
   const updateSelectedTool = useSetAtom(updateSelectedToolAtom);
   const selectedTool = useAtomValue(selectedToolAtom);
+
+  const toggleTool = (tool: ToolType) => {
+    if (tool === selectedTool) {
+      updateSelectedTool(null);
+    } else {
+      updateSelectedTool(tool);
+    }
+  };
 
   return (
     <div className="flex items-center gap-1">
@@ -37,7 +45,7 @@ export const Left = () => {
                 className={cn("px-1", {
                   "border-ring border-t-8": tool.type === selectedTool,
                 })}
-                onClick={() => updateSelectedTool(tool.type)}
+                onClick={() => toggleTool(tool.type)}
               >
                 <img src={tool.icon} alt={tool.name} className="size-6" />
               </div>

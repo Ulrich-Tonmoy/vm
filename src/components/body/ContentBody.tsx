@@ -1,14 +1,12 @@
-import { selectedToolAtom, updateSearchTermAtom, updateSelectedToolAtom } from "@/store";
+import { selectedToolAtom, updateSearchTermAtom } from "@/store";
 import { useAtomValue, useSetAtom } from "jotai";
 import { Installed, Available } from "./";
 import { useCallback } from "react";
 import { debounce } from "@/libs";
-import { ExitIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { Button } from "@/components/Button";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 export const ContentBody = () => {
   const selectedTool = useAtomValue(selectedToolAtom);
-  const updateSelectedTool = useSetAtom(updateSelectedToolAtom);
   const updateSearchTerm = useSetAtom(updateSearchTermAtom);
 
   const debouncedSearch = useCallback(
@@ -32,13 +30,6 @@ export const ContentBody = () => {
             <span className="p-1 px-3 m-1 mx-3 text-xl font-black rounded-md text-md lg:text-4xl backdrop-blur-sm bg-slate-400/30">
               {selectedTool} Version Manager
             </span>
-            <Button
-              variant="outline"
-              size="icon"
-              content={<ExitIcon className="size-7" />}
-              tooltip="Close"
-              onClick={() => updateSelectedTool(null)}
-            />
           </div>
           <div className="flex text-sm rounded-lg items-center bg-input w-[90%] lg:w-[80vw] h-12">
             <input
