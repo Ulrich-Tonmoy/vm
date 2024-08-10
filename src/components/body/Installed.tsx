@@ -11,7 +11,7 @@ export const Installed = () => {
 
   return (
     <div className="flex flex-col items-center p-4">
-      <div className="p-1 px-2 mb-4 text-xl font-black rounded-md shadow-xl lg:text-4xl backdrop-blur-sm bg-slate-400/30">
+      <div className="p-1 px-2 mb-4 text-xl font-black rounded-md lg:text-4xl bg-slate-400/30">
         Installed
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2 ml-8 md:m-0">
@@ -29,7 +29,7 @@ export const Installed = () => {
             .map((i) => (
               <div
                 key={i}
-                className="flex items-center justify-center p-1 px-2 rounded-md shadow-xl text-md lg:text-2xl backdrop-blur-sm bg-slate-400/30 gap-x-2"
+                className="flex items-center justify-center p-1 px-2 rounded-md text-md lg:text-2xl bg-slate-400/30 gap-x-2"
               >
                 {i}
                 {selectedConfig.active === i ? (

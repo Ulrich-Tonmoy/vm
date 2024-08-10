@@ -20,14 +20,14 @@ export const List = ({ name, list }: ListProps) => {
 
   return (
     <div className="flex flex-col items-center mb-4 space-y-3">
-      <div className="p-1 px-2 text-sm font-black rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30">
+      <div className="p-1 px-2 text-sm font-black rounded-md lg:text-2xl bg-slate-400/30">
         {name}
       </div>
       <div className="flex flex-row flex-wrap items-center justify-center gap-3">
         {newList.slice(0, limit).map((v, i) => (
           <div
             key={i}
-            className="flex flex-wrap items-center justify-center p-1 px-2 rounded-md shadow-xl text-md lg:text-2xl backdrop-blur-sm bg-slate-400/30 gap-x-2"
+            className="flex flex-wrap items-center justify-center p-1 px-2 rounded-md text-md lg:text-2xl bg-slate-400/30 gap-x-2"
           >
             {v.version}
             <Button

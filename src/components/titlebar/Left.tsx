@@ -42,7 +42,7 @@ export const Left = () => {
             <TooltipTrigger>
               <div
                 key={tool.name}
-                className={cn("px-1", {
+                className={cn("px-1", tool?.style, {
                   "border-ring border-t-8": tool.type === selectedTool,
                 })}
                 onClick={() => toggleTool(tool.type)}

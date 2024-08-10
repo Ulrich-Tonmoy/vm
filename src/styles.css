@@ -119,7 +119,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-md bg-slate-800;
+    @apply rounded-lg bg-slate-800;
   }
 
   ::-webkit-scrollbar-thumb:hover {

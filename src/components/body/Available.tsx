@@ -62,7 +62,7 @@ export const Available = () => {
     <div className="flex flex-col items-center justify-center mt-5">
       <title>{selectedTool}</title>
       <div className="flex items-center justify-center mb-4 text-xl gap-x-2 lg:text-4xl">
-        <div className="p-2 font-black rounded-md shadow-xl backdrop-blur-sm bg-slate-400/30">
+        <div className="p-2 font-black rounded-md bg-slate-400/30">
           Available For Installation
         </div>
         <Button
