@@ -15,5 +15,6 @@ export const toolList = [
     name: "Deno",
     icon: "/deno.png",
     type: ToolType.DENO,
+    style: "dark:bg-foreground ",
   },
 ];

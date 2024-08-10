@@ -26,6 +26,9 @@
       "http": {
         "all": true,
         "scope": ["https://**"]
+      },
+      "window": {
+        "all": true
       }
     },
     "windows": [
@@ -33,11 +36,12 @@
         "title": "Version Manager",
         "width": 800,
         "height": 600,
+        "minWidth": 750,
+        "minHeight": 450,
         "center": true,
-        "minWidth": 580,
-        "minHeight": 350,
         "resizable": true,
-        "decorations": true,
+        "decorations": false,
+        "titleBarStyle": "Visible",
         "transparent": true
       }
     ],

@@ -7,8 +7,9 @@ import {
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { NodeFilterVersionModel, NodeVersionListModel, ToolType } from "@/libs";
-import { RiRefreshFill } from "react-icons/ri";
 import { List } from "./List";
+import { SymbolIcon } from "@radix-ui/react-icons";
+import { Button } from "@/components/Button";
 
 export const Available = () => {
   const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
@@ -60,17 +61,15 @@ export const Available = () => {
   return (
     <div className="flex flex-col items-center justify-center mt-5">
       <title>{selectedTool}</title>
-      <div className="flex gap-1">
-        <div className="p-1 px-2 mb-4 text-xl font-black rounded-md shadow-xl lg:text-4xl backdrop-blur-sm bg-slate-400/30">
-          Available For Installation
-        </div>
-        <button
-          className="p-1 px-2 mb-4 text-xl font-black rounded-md shadow-xl lg:text-4xl backdrop-blur-sm bg-slate-400/30 hover:bg-slate-500/30"
-          title="Refresh The list"
+      <div className="p-2 font-black rounded-md bg-slate-400/30 flex items-center justify-center mb-4 text-xl gap-x-2 lg:text-4xl">
+        Available For Installation
+        <Button
+          variant="secondary"
+          size="icon"
+          content={<SymbolIcon className="size-8" />}
+          tooltip="Refresh The list"
           onClick={() => refreshAvailableVersion(true)}
-        >
-          <RiRefreshFill />
-        </button>
+        />
       </div>
       <div className="flex justify-between gap-4">
         {currentVersions.length === 0 &&
@@ -85,12 +84,12 @@ export const Available = () => {
             <p>Try refreshing the list.</p>
           </div>
         ) : (
-          <>
-            <List key={"Current"} name="Current" list={currentVersions} />
+          <div className="flex flex-col">
             <List key={"LTS"} name="LTS" list={ltsVersions} />
+            <List key={"Current"} name="Current" list={currentVersions} />
             <List key={"Old Stable"} name="Old Stable" list={stableVersions} />
             <List key={"Old UnStable"} name="Old UnStable" list={unStableVersions} />
-          </>
+          </div>
         )}
       </div>
     </div>

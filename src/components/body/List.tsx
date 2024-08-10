@@ -1,8 +1,9 @@
 import { LIST_LIMIT, NodeVersionListModel } from "@/libs";
 import { searchTermAtom } from "@/store";
+import { ChevronDownIcon, ChevronUpIcon, DownloadIcon } from "@radix-ui/react-icons";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
-import { MdExpandLess, MdInstallDesktop, MdOutlineExpandMore } from "react-icons/md";
+import { Button } from "@/components/Button";
 
 interface ListProps {
   name: string;
@@ -18,41 +19,44 @@ export const List = ({ name, list }: ListProps) => {
   const collapse = newList.length === limit;
 
   return (
-    <div className="flex flex-col items-center space-y-2">
-      <div className="p-1 px-2 text-sm font-black rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30">
+    <div className="flex flex-col items-center mb-4 space-y-3">
+      <div className="p-1 px-2 text-sm font-black rounded-md lg:text-2xl bg-slate-400/30">
         {name}
       </div>
-      {newList.slice(0, limit).map((v, i) => (
-        <div
-          key={i}
-          className="flex flex-wrap items-center justify-center p-1 px-2 text-sm rounded-md shadow-xl lg:text-2xl backdrop-blur-sm bg-slate-400/30"
-        >
-          {v.version}
-          <button
-            className="p-1 ml-1 rounded-md hover:bg-slate-600 bg-slate-900"
-            title="Install"
+      <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+        {newList.slice(0, limit).map((v, i) => (
+          <div
+            key={i}
+            className="flex flex-wrap items-center justify-center p-1 px-2 rounded-md text-md lg:text-2xl bg-slate-400/30 gap-x-2"
           >
-            <MdInstallDesktop className="size-5 lg:size-8" />
-          </button>
-        </div>
-      ))}
+            <span className="cursor-text select-text">{v.version}</span>
+            <Button
+              variant="outline"
+              size="icon"
+              content={<DownloadIcon className="size-8" />}
+              tooltip={`Install ${v.version}`}
+              onClick={() => {}}
+            />
+          </div>
+        ))}
+      </div>
       {expand && (
-        <button
-          className="flex items-center justify-center rounded-md hover:bg-slate-600 bg-slate-900"
-          title="Show More"
+        <Button
+          variant="secondary"
+          size="icon"
+          tooltip="Show more"
+          content={<ChevronDownIcon className="size-8" />}
           onClick={() => setLimit(newList.length)}
-        >
-          <MdOutlineExpandMore className="size-8" />
-        </button>
+        />
       )}
       {collapse && (
-        <button
-          className="flex items-center justify-center rounded-md hover:bg-slate-600 bg-slate-900"
-          title="Collapse"
+        <Button
+          variant="secondary"
+          size="icon"
+          content={<ChevronUpIcon className="size-8" />}
+          tooltip="Show less"
           onClick={() => setLimit(LIST_LIMIT)}
-        >
-          <MdExpandLess className="size-8" />
-        </button>
+        />
       )}
     </div>
   );
