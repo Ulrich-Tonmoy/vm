@@ -61,10 +61,8 @@ export const Available = () => {
   return (
     <div className="flex flex-col items-center justify-center mt-5">
       <title>{selectedTool}</title>
-      <div className="flex items-center justify-center mb-4 text-xl gap-x-2 lg:text-4xl">
-        <div className="p-2 font-black rounded-md bg-slate-400/30">
-          Available For Installation
-        </div>
+      <div className="p-2 font-black rounded-md bg-slate-400/30 flex items-center justify-center mb-4 text-xl gap-x-2 lg:text-4xl">
+        Available For Installation
         <Button
           variant="secondary"
           size="icon"

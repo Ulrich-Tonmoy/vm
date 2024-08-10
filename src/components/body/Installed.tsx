@@ -31,7 +31,7 @@ export const Installed = () => {
                 key={i}
                 className="flex items-center justify-center p-1 px-2 rounded-md text-md lg:text-2xl bg-slate-400/30 gap-x-2"
               >
-                {i}
+                <span className="cursor-text select-text">{i}</span>
                 {selectedConfig.active === i ? (
                   <Button
                     variant="ghost"

@@ -29,7 +29,7 @@ export const List = ({ name, list }: ListProps) => {
             key={i}
             className="flex flex-wrap items-center justify-center p-1 px-2 rounded-md text-md lg:text-2xl bg-slate-400/30 gap-x-2"
           >
-            {v.version}
+            <span className="cursor-text select-text">{v.version}</span>
             <Button
               variant="outline"
               size="icon"
@@ -39,25 +39,25 @@ export const List = ({ name, list }: ListProps) => {
             />
           </div>
         ))}
-        {expand && (
-          <Button
-            variant="secondary"
-            size="icon"
-            tooltip="Show more"
-            content={<ChevronDownIcon className="size-8" />}
-            onClick={() => setLimit(newList.length)}
-          />
-        )}
-        {collapse && (
-          <Button
-            variant="secondary"
-            size="icon"
-            content={<ChevronUpIcon className="size-8" />}
-            tooltip="Show less"
-            onClick={() => setLimit(LIST_LIMIT)}
-          />
-        )}
       </div>
+      {expand && (
+        <Button
+          variant="secondary"
+          size="icon"
+          tooltip="Show more"
+          content={<ChevronDownIcon className="size-8" />}
+          onClick={() => setLimit(newList.length)}
+        />
+      )}
+      {collapse && (
+        <Button
+          variant="secondary"
+          size="icon"
+          content={<ChevronUpIcon className="size-8" />}
+          tooltip="Show less"
+          onClick={() => setLimit(LIST_LIMIT)}
+        />
+      )}
     </div>
   );
 };
