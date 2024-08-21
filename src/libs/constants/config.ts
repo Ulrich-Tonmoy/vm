@@ -20,6 +20,8 @@ export const INITIAL_CONFIG: ConfigModel = {
     active: "",
     installed: [],
   },
+  theme: "system",
+  fontFamily: "font-Krypton",
 };
 
 export const LIST_LIMIT = 20;

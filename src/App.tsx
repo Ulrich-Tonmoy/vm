@@ -1,21 +1,28 @@
 import { ContentBody, ContentLayout, TitleBar } from "@/components";
-import { useSetAtom } from "jotai";
-import { loadConfigAtom } from "@/store";
+import { useAtomValue, useSetAtom } from "jotai";
+import { fontFamilyAtom, loadConfigAtom } from "@/store";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "@/components";
+import { cn } from "./libs";
 
 function App() {
   const loadConfig = useSetAtom(loadConfigAtom);
+  const fontFamily = useAtomValue(fontFamilyAtom);
 
   useEffect(() => {
     loadConfig();
   }, []);
 
   return (
-    <main className="h-full overflow-hidden antialiased select-none text-foreground font-Krypton rounded-lg bg-background">
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <main
+      className={cn(
+        "h-full overflow-hidden antialiased select-none text-foreground rounded-lg bg-background",
+        fontFamily,
+      )}
+    >
+      <ThemeProvider defaultTheme="system">
         <TitleBar />
         <ContentLayout>
           <ContentBody />

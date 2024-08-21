@@ -6,14 +6,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ModeToggle } from "./theme-toggle";
-import {
-  CopyIcon,
-  Cross1Icon,
-  GearIcon,
-  MinusIcon,
-  SquareIcon,
-} from "@radix-ui/react-icons";
+import { CopyIcon, Cross1Icon, MinusIcon, SquareIcon } from "@radix-ui/react-icons";
+import { Settings } from "./settings";
 
 export const Right = () => {
   const [isMaximized, setIsMaximized] = useState(false);
@@ -34,28 +28,7 @@ export const Right = () => {
 
   return (
     <div className="flex items-center">
-      <div className="flex items-center justify-center mr-3">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <GearIcon className="size-8 px-1.5 hover:bg-border hover:rounded-md" />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Settings</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <ModeToggle />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Toggle Theme</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
+      <Settings />
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>

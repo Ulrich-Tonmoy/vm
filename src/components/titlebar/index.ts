@@ -1,2 +1,2 @@
 export * from "./Titlebar";
-export * from "./theme-toggle";
+export * from "./settings";
