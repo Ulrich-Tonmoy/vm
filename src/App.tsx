@@ -17,7 +17,7 @@ function App() {
     <main className="h-full overflow-hidden antialiased select-none text-foreground font-Krypton rounded-lg bg-background">
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <TitleBar />
-        <ContentLayout className="border-l border-slate-800">
+        <ContentLayout>
           <ContentBody />
         </ContentLayout>
         <ToastContainer

@@ -43,7 +43,7 @@ export const Left = () => {
               <div
                 key={tool.name}
                 className={cn("px-1", tool?.style, {
-                  "border-ring border-t-8": tool.type === selectedTool,
+                  "border-ring border-t-4": tool.type === selectedTool,
                 })}
                 onClick={() => toggleTool(tool.type)}
               >

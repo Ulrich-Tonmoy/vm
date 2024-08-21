@@ -1,4 +1,4 @@
-import { LIST_LIMIT, NodeVersionListModel } from "@/libs";
+import { cn, LIST_LIMIT, NodeVersionListModel } from "@/libs";
 import { searchTermAtom } from "@/store";
 import { ChevronDownIcon, ChevronUpIcon, DownloadIcon } from "@radix-ui/react-icons";
 import { useAtomValue } from "jotai";
@@ -20,14 +20,21 @@ export const List = ({ name, list }: ListProps) => {
 
   return (
     <div className="flex flex-col items-center mb-4 space-y-3">
-      <div className="p-1 px-2 text-sm font-black rounded-md lg:text-2xl bg-slate-400/30">
+      <div
+        className={cn(
+          "p-1 px-2 text-sm font-black rounded-md md:text-2xl text-card-foreground bg-card shadow-md",
+          {
+            "text-primary-foreground bg-primary shadow-md": name === "LTS",
+          },
+        )}
+      >
         {name}
       </div>
-      <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+      <div className="flex flex-row flex-wrap items-center justify-evenly gap-3">
         {newList.slice(0, limit).map((v, i) => (
           <div
             key={i}
-            className="flex flex-wrap items-center justify-center p-1 px-2 rounded-md text-md lg:text-2xl bg-slate-400/30 gap-x-2"
+            className="flex flex-wrap items-center justify-center p-1 px-2 rounded-md text-md lg:text-2xl bg-card shadow-md gap-x-2"
           >
             <span className="cursor-text select-text">{v.version}</span>
             <Button
@@ -42,16 +49,16 @@ export const List = ({ name, list }: ListProps) => {
       </div>
       {expand && (
         <Button
-          variant="secondary"
+          variant="outline"
           size="icon"
-          tooltip="Show more"
+          tooltip="Show All"
           content={<ChevronDownIcon className="size-8" />}
           onClick={() => setLimit(newList.length)}
         />
       )}
       {collapse && (
         <Button
-          variant="secondary"
+          variant="outline"
           size="icon"
           content={<ChevronUpIcon className="size-8" />}
           tooltip="Show less"
