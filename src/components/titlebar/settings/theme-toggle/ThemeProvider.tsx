@@ -1,4 +1,4 @@
-import { configAtom, updateConfigAtom } from "@/store";
+import { themeAtom, updateConfigAtom } from "@/store";
 import { useAtomValue, useSetAtom } from "jotai";
 import { createContext, useContext, useEffect } from "react";
 
@@ -27,9 +27,8 @@ export function ThemeProvider({
   defaultTheme = "system",
   ...props
 }: ThemeProviderProps) {
-  const config = useAtomValue(configAtom);
+  const theme = (useAtomValue(themeAtom) as Theme) || defaultTheme;
   const updateConfig = useSetAtom(updateConfigAtom);
-  const theme = (config.theme as Theme) || defaultTheme;
 
   const updateTheme = async () => {
     const root = window.document.documentElement;
@@ -55,7 +54,7 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      updateConfig({ ...config, theme });
+      updateConfig({ theme });
       updateTheme();
     },
   };

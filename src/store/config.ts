@@ -4,20 +4,36 @@ import {
   dataDirPath,
   INITIAL_CONFIG,
   readFile,
+  StoreConfigModel,
+  StoreToolsModel,
   writeFile,
 } from "@/libs";
 import { atom } from "jotai";
 
 export const configAtom = atom<ConfigModel>(INITIAL_CONFIG);
+export const toolsAtom = atom<StoreToolsModel>(INITIAL_CONFIG);
+export const themeAtom = atom<string>(INITIAL_CONFIG.theme);
 export const fontFamilyAtom = atom<string>(INITIAL_CONFIG.fontFamily);
 
-export const updateConfigAtom = atom(null, async (get, set, config: ConfigModel) => {
+export const updateConfigAtom = atom(null, async (get, set, config: StoreConfigModel) => {
   const oldConfig = get(configAtom);
   const dirPath = await dataDirPath();
-  set(configAtom, config);
-  if (config.fontFamily !== oldConfig.fontFamily) set(fontFamilyAtom, config.fontFamily);
+  const newConfig = { ...oldConfig, ...config };
 
-  await writeFile(dirPath, CONFIG_FILE_NAME, JSON.stringify(config));
+  set(configAtom, newConfig);
+
+  if (config.theme) set(themeAtom, config.theme);
+  if (config.fontFamily) set(fontFamilyAtom, config.fontFamily);
+  if (config.Node || config.Bun || config.Deno) {
+    const tools = {
+      Node: config.Node ?? INITIAL_CONFIG.Node,
+      Bun: config.Bun ?? INITIAL_CONFIG.Bun,
+      Deno: config.Deno ?? INITIAL_CONFIG.Deno,
+    };
+    set(toolsAtom, tools);
+  }
+
+  await writeFile(dirPath, CONFIG_FILE_NAME, JSON.stringify(newConfig));
 });
 
 export const loadConfigAtom = atom(null, async (_, set) => {
@@ -32,7 +48,11 @@ export const loadConfigAtom = atom(null, async (_, set) => {
         theme: config.theme ?? INITIAL_CONFIG.theme,
         fontFamily: config.fontFamily ?? INITIAL_CONFIG.fontFamily,
       };
+
+      const tools = { Node: config.Node, Bun: config.Bun, Deno: config.Deno };
       set(configAtom, config);
+      set(toolsAtom, tools);
+      set(themeAtom, config.theme);
       set(fontFamilyAtom, config.fontFamily);
     }
   });

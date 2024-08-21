@@ -8,17 +8,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { fontFamilyList } from "@/libs";
-import { configAtom, updateConfigAtom } from "@/store";
+import { fontFamilyAtom, updateConfigAtom } from "@/store";
 import { FontFamilyIcon } from "@radix-ui/react-icons";
 import { useAtomValue, useSetAtom } from "jotai";
 
 export function FontToggle() {
-  const config = useAtomValue(configAtom);
-  const fontFamily = config.fontFamily;
+  const fontFamily = useAtomValue(fontFamilyAtom);
   const updateConfig = useSetAtom(updateConfigAtom);
 
   const onChange = (fontFamily: string) => {
-    updateConfig({ ...config, fontFamily });
+    updateConfig({ fontFamily });
   };
 
   return (

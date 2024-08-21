@@ -1,4 +1,4 @@
-import { configAtom, searchTermAtom, selectedToolAtom } from "@/store";
+import { toolsAtom, searchTermAtom, selectedToolAtom } from "@/store";
 import { CheckIcon, TrashIcon } from "@radix-ui/react-icons";
 import { useAtomValue } from "jotai";
 import { Button } from "@/components/Button";
@@ -6,8 +6,8 @@ import { Button } from "@/components/Button";
 export const Installed = () => {
   const searchTerm = useAtomValue(searchTermAtom);
   const selectedTool = useAtomValue(selectedToolAtom);
-  const config = useAtomValue(configAtom);
-  const selectedConfig = config[selectedTool!];
+  const tools = useAtomValue(toolsAtom);
+  const selectedConfig = tools[selectedTool!];
 
   return (
     <div className="flex flex-col items-center p-4">

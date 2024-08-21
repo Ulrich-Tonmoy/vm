@@ -1,5 +1,5 @@
 import {
-  configAtom,
+  toolsAtom,
   getNodeVersionCategoryAtom,
   loadNodeVersionAtom,
   selectedToolAtom,
@@ -15,8 +15,8 @@ export const Available = () => {
   const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
   const getNodeVersionCategory = useSetAtom(getNodeVersionCategoryAtom);
   const selectedTool = useAtomValue(selectedToolAtom);
-  const config = useAtomValue(configAtom);
-  const selectedConfig = config[selectedTool!];
+  const tools = useAtomValue(toolsAtom);
+  const selectedConfig = tools[selectedTool!];
 
   const [ltsVersions, setLtsVersions] = useState<NodeVersionListModel[]>([]);
   const [currentVersions, setCurrentVersions] = useState<NodeVersionListModel[]>([]);

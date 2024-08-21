@@ -17,10 +17,11 @@ import { FontToggle } from "./FontToggle";
 import { ThemeToggle } from "./theme-toggle";
 import { Label } from "@/components/ui/label";
 import { useAtomValue } from "jotai";
-import { configAtom } from "@/store";
+import { fontFamilyAtom, themeAtom } from "@/store";
 
 export const Settings = () => {
-  const config = useAtomValue(configAtom);
+  const theme = useAtomValue(themeAtom);
+  const fontFamily = useAtomValue(fontFamilyAtom);
 
   return (
     <div className="m-0 p-0 size-8">
@@ -60,7 +61,7 @@ export const Settings = () => {
                 </Tooltip>
               </TooltipProvider>
               <ArrowRightIcon />
-              <p className="font-bold">{config.fontFamily}</p>
+              <p className="font-bold">{fontFamily}</p>
             </div>
             <div className="flex items-center justify-center space-x-2 text-foreground">
               <TooltipProvider>
@@ -77,7 +78,7 @@ export const Settings = () => {
                 </Tooltip>
               </TooltipProvider>
               <ArrowRightIcon />
-              <p className="font-bold">{config.theme}</p>
+              <p className="font-bold">{theme}</p>
             </div>
           </div>
         </SheetContent>
