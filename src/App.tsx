@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "@/components";
-import { cn } from "./libs";
+import { cn } from "@/libs";
 
 function App() {
   const loadConfig = useSetAtom(loadConfigAtom);

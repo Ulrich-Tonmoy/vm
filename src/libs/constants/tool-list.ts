@@ -1,6 +1,7 @@
 import { ToolType } from "../enums";
+import { ToolList } from "../models";
 
-export const toolList = [
+export const toolList: ToolList[] = [
   {
     name: "Node JS",
     icon: "/node.png",

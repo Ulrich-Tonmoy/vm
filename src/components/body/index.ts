@@ -1,3 +1,2 @@
-export * from "./Installed";
-export * from "./Available";
+export * from "./node";
 export * from "./ContentBody";

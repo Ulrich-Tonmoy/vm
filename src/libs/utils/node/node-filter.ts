@@ -1,4 +1,4 @@
-import { NodeVersionListModel } from "../models";
+import { NodeVersionListModel } from "@/libs/models";
 
 export const parseVersion = (
   versionStr: string,

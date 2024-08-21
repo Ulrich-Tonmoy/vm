@@ -7,6 +7,8 @@ import {
   loadNodeVersionList,
 } from "@/libs";
 import { atom } from "jotai";
+import { toolsAtom } from "./config";
+import { selectedToolAtom } from "./app";
 
 export const nodeAllVersionAtom = atom<NodeVersionListModel[] | []>([]);
 export const nodeLtsVersionAtom = atom<NodeVersionListModel[] | []>([]);
@@ -16,7 +18,7 @@ export const nodeUnStableVersionAtom = atom<NodeVersionListModel[] | []>([]);
 
 export const loadNodeVersionAtom = atom(
   null,
-  async (_, set, isRefresh: boolean = false) => {
+  async (get, set, isRefresh: boolean = false) => {
     const all = await loadNodeVersionList(isRefresh);
     let lts: NodeVersionListModel[] | [] = [];
     let current: NodeVersionListModel[] | [] = [];
@@ -31,26 +33,20 @@ export const loadNodeVersionAtom = atom(
       stable = all.filter((data: NodeVersionListModel) => isStable(data));
       unstable = all.filter((data: NodeVersionListModel) => isUnstable(data));
 
-      set(nodeLtsVersionAtom, lts);
-      set(nodeCurrentVersionAtom, current);
-      set(nodeStableVersionAtom, stable);
-      set(nodeUnStableVersionAtom, unstable);
+      const tools = get(toolsAtom);
+      const selectedTool = get(selectedToolAtom);
+      const selectedConfig = tools[selectedTool!];
+
+      const installedSet = new Set(selectedConfig.installed);
+      const ltsVersions = lts.filter((v) => !installedSet.has(v.version));
+      const currentVersions = current.filter((v) => !installedSet.has(v.version));
+      const stableVersions = stable.filter((v) => !installedSet.has(v.version));
+      const unStableVersions = unstable.filter((v) => !installedSet.has(v.version));
+
+      set(nodeLtsVersionAtom, ltsVersions);
+      set(nodeCurrentVersionAtom, currentVersions);
+      set(nodeStableVersionAtom, stableVersions);
+      set(nodeUnStableVersionAtom, unStableVersions);
     }
   },
 );
-
-export const getNodeVersionCategoryAtom = atom(null, (get, _set) => {
-  const all = get(nodeAllVersionAtom);
-  const lts = get(nodeLtsVersionAtom);
-  const current = get(nodeCurrentVersionAtom);
-  const stable = get(nodeStableVersionAtom);
-  const unstable = get(nodeUnStableVersionAtom);
-
-  return {
-    all,
-    lts,
-    current,
-    stable,
-    unstable,
-  };
-});

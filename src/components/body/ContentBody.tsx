@@ -1,9 +1,9 @@
 import { searchTermAtom, selectedToolAtom, updateSearchTermAtom } from "@/store";
 import { useAtomValue, useSetAtom } from "jotai";
-import { Installed, Available } from "./";
 import { useCallback } from "react";
-import { debounce } from "@/libs";
+import { debounce, ToolType } from "@/libs";
 import { Cross1Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { Node } from "./node";
 
 export const ContentBody = () => {
   const selectedTool = useAtomValue(selectedToolAtom);
@@ -50,8 +50,16 @@ export const ContentBody = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-around h-full px-2">
-          <Installed />
-          <Available />
+          {selectedTool === ToolType.NODE ? (
+            <Node />
+          ) : (
+            <div
+              className="p-4 text-orange-700 bg-orange-100 border-l-4 border-orange-500"
+              role="alert"
+            >
+              <p className="font-bold">Under Construction</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

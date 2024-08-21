@@ -1,4 +1,4 @@
-import { cn, LIST_LIMIT, NodeVersionListModel } from "@/libs";
+import { cn, getNodeVersionList, LIST_LIMIT, VersionType } from "@/libs";
 import { searchTermAtom } from "@/store";
 import { ChevronDownIcon, ChevronUpIcon, DownloadIcon } from "@radix-ui/react-icons";
 import { useAtomValue } from "jotai";
@@ -6,17 +6,19 @@ import { useState } from "react";
 import { Button } from "@/components/Button";
 
 interface ListProps {
-  name: string;
-  list: NodeVersionListModel[];
+  versionType: VersionType;
 }
 
-export const List = ({ name, list }: ListProps) => {
+export const List = ({ versionType }: ListProps) => {
+  const list = getNodeVersionList(versionType);
   const [limit, setLimit] = useState(LIST_LIMIT);
   const searchTerm = useAtomValue(searchTermAtom);
-  const newList = list.filter((v) => v.version.includes(searchTerm));
+  const newList = list?.filter((v) => v.version.includes(searchTerm));
 
   const expand = newList.length > limit;
   const collapse = newList.length === limit;
+
+  if (newList.length === 0) return null;
 
   return (
     <div className="flex flex-col items-center mb-4 space-y-3">
@@ -24,11 +26,11 @@ export const List = ({ name, list }: ListProps) => {
         className={cn(
           "p-1 px-2 text-sm font-black rounded-md md:text-2xl text-card-foreground bg-card shadow-md",
           {
-            "text-primary-foreground bg-primary shadow-md": name === "LTS",
+            "text-primary-foreground bg-primary shadow-md": versionType === "LTS",
           },
         )}
       >
-        {name}
+        {versionType}
       </div>
       <div className="flex flex-row flex-wrap items-center justify-evenly gap-3">
         {newList.slice(0, limit).map((v, i) => (

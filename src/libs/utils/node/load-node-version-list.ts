@@ -1,7 +1,7 @@
-import { fetchNodeVersionList } from "../fetch";
-import { dataDirPath, readFile, writeFile } from "./fs";
-import { NODE_FOLDER_NAME, NODE_VERSION_LIST_FILE_NAME } from "../constants";
-import { FileSysRes } from "@/libs";
+import { NODE_FOLDER_NAME, NODE_VERSION_LIST_FILE_NAME } from "@/libs/constants";
+import { dataDirPath, readFile, writeFile } from "../fs";
+import { FileSysRes } from "@/libs/enums";
+import { fetchNodeVersionList } from "@/libs/fetch";
 
 export const loadNodeVersionList = async (isRefresh: boolean) => {
   let all = [];
