@@ -90,9 +90,16 @@ pub async fn download_and_unzip<R: tauri::Runtime>(
             }
         }
 
-        // Rename the directory to `v` if it's not already named `v`
+        // Rename the directory to `new_name` if it's not already named `new_name`
         let unzipped_folder_path = std::path::Path::new(&dest).join(&old_name);
         let final_dest = std::path::Path::new(&dest).join(&new_name);
+
+        if final_dest.exists() {
+            fs::remove_dir_all(&final_dest)
+                .await
+                .map_err(|e| format!("Failed to remove existing folder: {}", e))
+                .unwrap();
+        }
 
         if unzipped_folder_path != final_dest {
             fs::rename(&unzipped_folder_path, &final_dest)
