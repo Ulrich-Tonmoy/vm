@@ -1,9 +1,10 @@
 import { cn, getNodeVersionList, LIST_LIMIT, VersionType } from "@/libs";
 import { searchTermAtom } from "@/store";
-import { ChevronDownIcon, ChevronUpIcon, DownloadIcon } from "@radix-ui/react-icons";
+import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { Button } from "@/components/Button";
+import { ListItem } from "./ListItem";
 
 interface ListProps {
   versionType: VersionType;
@@ -34,19 +35,7 @@ export const List = ({ versionType }: ListProps) => {
       </div>
       <div className="flex flex-row flex-wrap items-center justify-evenly gap-3">
         {newList.slice(0, limit).map((v, i) => (
-          <div
-            key={i}
-            className="flex flex-wrap items-center justify-center p-1 px-2 rounded-md text-md lg:text-2xl bg-card shadow-md gap-x-2"
-          >
-            <span className="cursor-text select-text">{v.version}</span>
-            <Button
-              variant="outline"
-              size="icon"
-              content={<DownloadIcon className="size-8" />}
-              tooltip={`Install ${v.version}`}
-              onClick={() => {}}
-            />
-          </div>
+          <ListItem versionInfo={v} key={i} />
         ))}
       </div>
       {expand && (

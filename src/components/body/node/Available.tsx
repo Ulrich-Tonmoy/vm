@@ -1,7 +1,7 @@
 import { loadNodeVersionAtom, selectedToolAtom } from "@/store";
 import { useAtomValue, useSetAtom } from "jotai";
 import { getNodeVersionList, VersionType } from "@/libs";
-import { List } from "./List";
+import { List } from "./list";
 import { SymbolIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/Button";
 import { useEffect } from "react";
