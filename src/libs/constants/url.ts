@@ -1,1 +1,1 @@
-export const NODE_BASE_ADDRESS = `https://nodejs.org/dist/`;
+export const NODE_BASE_URL = `https://nodejs.org/dist/`;

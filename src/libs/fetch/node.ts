@@ -1,11 +1,11 @@
 import { ResponseType, fetch } from "@tauri-apps/api/http";
 import { showNotification } from "../utils";
 import { NotificationType } from "../enums";
-import { NODE_BASE_ADDRESS } from "../constants";
+import { NODE_BASE_URL } from "../constants";
 import { NodeVersionListModel } from "../models";
 
 export const fetchNodeVersionList = async (): Promise<NodeVersionListModel[]> => {
-  const response = await fetch(`${NODE_BASE_ADDRESS}index.json`, {
+  const response = await fetch(`${NODE_BASE_URL}index.json`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
