@@ -1,21 +1,28 @@
-use std::io::{self};
 use winreg::enums::*;
 use winreg::RegKey;
 
-pub fn get_user_path() -> Result<String, io::Error> {
+#[tauri::command]
+pub fn get_user_path() -> Result<String, String> {
     let hkcu = RegKey::predef(HKEY_CURRENT_USER);
-    let env = hkcu.open_subkey("Environment")?;
-    let paths: Result<String, io::Error> = match env.get_value::<String, _>("PATH") {
-        Ok(path) => Ok(path),
-        Err(_) => Ok(String::new()),
-    };
-    paths
+    let env = hkcu
+        .open_subkey("Environment")
+        .map_err(|e| format!("Failed to open registry key: {}", e))?;
+
+    let path: String = env.get_value("PATH").unwrap_or_else(|_| String::new());
+
+    Ok(path)
 }
 
-pub fn set_user_path(new_path: &str) -> Result<(), io::Error> {
+#[tauri::command]
+pub fn set_user_path(new_path: &str) -> Result<(), String> {
     let hkcu = RegKey::predef(HKEY_CURRENT_USER);
-    let (env, _) = hkcu.create_subkey("Environment")?;
-    env.set_value("PATH", &new_path)?;
+    let (env, _) = hkcu
+        .create_subkey("Environment")
+        .map_err(|e| format!("Failed to create or open registry key: {}", e))?;
+
+    env.set_value("PATH", &new_path)
+        .map_err(|e| format!("Failed to set registry value: {}", e))?;
+
     println!("Updated user PATH: {}", new_path);
     Ok(())
 }
