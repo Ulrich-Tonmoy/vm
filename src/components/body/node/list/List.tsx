@@ -34,8 +34,8 @@ export const List = ({ versionType }: ListProps) => {
         {versionType}
       </div>
       <div className="flex flex-row flex-wrap items-center justify-evenly gap-3">
-        {newList.slice(0, limit).map((v, i) => (
-          <ListItem versionInfo={v} key={i} />
+        {newList.slice(0, limit).map((v) => (
+          <ListItem versionInfo={v} key={v.version} />
         ))}
       </div>
       {expand && (

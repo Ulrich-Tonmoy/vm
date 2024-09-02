@@ -22,5 +22,5 @@ export interface StoreConfigModel {
 
 export interface ConfigGeneralObject {
   active: string;
-  installed: [name: string] | [];
+  installed: string[];
 }

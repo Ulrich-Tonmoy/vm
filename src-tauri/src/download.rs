@@ -38,7 +38,7 @@ pub async fn download_and_unzip<R: tauri::Runtime>(
             .unwrap();
         let total_size = response.content_length().unwrap_or(0) as f32;
 
-        let zip_path = format!("{}/download.zip", &dest);
+        let zip_path = format!("{}/{}.zip", &dest, &new_name);
         let mut file = File::create(&zip_path).map_err(|e| e.to_string()).unwrap();
 
         let mut downloaded = 0.0;
