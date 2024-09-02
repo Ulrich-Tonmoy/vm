@@ -16,9 +16,7 @@
         "all": true,
         "open": true
       },
-      "path": {
-        "all": true
-      },
+      "path": { "all": true },
       "fs": {
         "all": true,
         "scope": ["**"]
@@ -27,9 +25,8 @@
         "all": true,
         "scope": ["https://**"]
       },
-      "window": {
-        "all": true
-      }
+      "window": { "all": true },
+      "dialog": { "all": true }
     },
     "windows": [
       {
