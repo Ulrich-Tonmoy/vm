@@ -48,7 +48,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "Version Manager",
+      "identifier": "version-manager",
       "icon": ["icons/logo.png", "icons/logo.ico"]
     }
   }
