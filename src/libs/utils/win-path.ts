@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api";
+import { DEFAULT_REMOVE_FROM_PATH } from "../constants";
 
 export const setToPath = (path: string) => {
   invoke("get_user_path").then((message: unknown) => {
@@ -6,10 +7,15 @@ export const setToPath = (path: string) => {
     console.log(paths.split(";"));
 
     let newPath = paths;
+
+    const contains = DEFAULT_REMOVE_FROM_PATH.some((defaultPath) =>
+      newPath.includes(defaultPath),
+    );
+    if (contains) removeFromPath();
+
     if (!newPath.endsWith(";")) {
       newPath += ";";
     }
-
     if (!newPath.includes(path)) {
       newPath += path;
     }
@@ -21,9 +27,7 @@ export const setToPath = (path: string) => {
   });
 };
 
-export const removeFromPath = (
-  pathToRemove: string[] = ["%NVM_SYMLINK%;", "C:\\Program Files\\nodejs;"],
-) => {
+export const removeFromPath = (pathToRemove: string[] = DEFAULT_REMOVE_FROM_PATH) => {
   invoke("get_user_path").then((message: unknown) => {
     const paths = message as string;
     console.log(paths.split(";"));
