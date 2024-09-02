@@ -1,3 +1,7 @@
+### 0.0.2:
+
+- [x] check if node js path exist to remove from the path.
+
 ### 0.0.1:
 
 - [x] Download/Install node versions.
