@@ -37,6 +37,10 @@ export const Installed = () => {
 
   const useVersion = async (version: string) => {
     const path = await dataDirPath();
+    const active = selectedConfig.active;
+    if (active) {
+      removeFromPath([NODE_INSTALLED_PATH(path, active)]);
+    }
     setToPath(NODE_INSTALLED_PATH(path, version));
     updateConfig({
       Node: {
