@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "version-manager",
+    "productName": "Version Manager",
     "version": "0.0.1"
   },
   "tauri": {
@@ -48,7 +48,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "VM",
+      "identifier": "version-manager",
       "icon": ["icons/logo.png", "icons/logo.ico"]
     }
   }
