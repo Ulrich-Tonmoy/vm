@@ -4,6 +4,7 @@ import { getNodeVersionList, VersionType } from "@/libs";
 import { List } from "./list";
 import { SymbolIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/Button";
+import { useEffect } from "react";
 
 export const Available = () => {
   const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
@@ -12,6 +13,10 @@ export const Available = () => {
   const refreshAvailableVersion = async (isRefresh: boolean) => {
     await loadNodeVersion(isRefresh);
   };
+
+  useEffect(() => {
+    refreshAvailableVersion(false);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center mt-5">
