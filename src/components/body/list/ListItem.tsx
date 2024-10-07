@@ -39,7 +39,7 @@ export const ListItem = ({ versionInfo }: ListItemProps) => {
     const newName = versionInfo.version;
     const oldName = NODE_UNZIP_FOLDER_NAME(newName);
     const url = NODE_DOWNLOAD_URL(newName);
-    const dest = (await dataDirPath()) + "/node";
+    const dest = await dataDirPath();
     await invoke("download_and_unzip", { url, dest, oldName, newName });
     updateDownloading({ version: versionInfo.version });
   };
