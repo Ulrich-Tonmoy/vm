@@ -61,17 +61,17 @@ export const createFolder = async (folderPath: string): Promise<string> => {
 };
 
 export const deleteFolder = async (dirPath: string): Promise<string> => {
-  const folderName = await basename(dirPath);
+  // const folderName = await basename(dirPath);
 
-  const confirmed = await ask(
-    `Are you sure you want to delete folder name '${folderName}'?\nThis action cannot be reverted.`,
-    {
-      title: `Are you sure you want to delete folder name '${folderName}'?`,
-      type: "warning",
-    },
-  );
+  // const confirmed = await ask(
+  //   `Are you sure you want to delete folder name '${folderName}'?\nThis action cannot be reverted.`,
+  //   {
+  //     title: `Are you sure you want to delete folder name '${folderName}'?`,
+  //     type: "warning",
+  //   },
+  // );
 
-  if (!confirmed) return FileSysRes.CANCEL;
+  // if (!confirmed) return FileSysRes.CANCEL;
   await removeDir(dirPath, { recursive: true });
   return FileSysRes.OK;
 };

@@ -1,7 +1,7 @@
 import { nodeAtom, searchTermAtom, loadNodeVersionAtom, updateConfigAtom } from "@/store";
 import { CheckIcon, ExitIcon, TrashIcon } from "@radix-ui/react-icons";
 import { useAtomValue, useSetAtom } from "jotai";
-import { Button } from "@/components/Button";
+import { Button, DialogButton } from "@/components";
 import {
   dataDirPath,
   deleteFolder,
@@ -130,11 +130,12 @@ export const Installed = () => {
                     tooltip={`Use ${i}`}
                     onClick={() => useVersion(i)}
                   />
-                  <Button
+                  <DialogButton
                     variant="outline"
                     size="icon"
                     content={<TrashIcon className="size-8 text-rose-500" />}
                     tooltip={`Uninstall ${i}`}
+                    info={i}
                     onClick={() => deleteVersion(i)}
                   />
                 </div>
