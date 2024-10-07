@@ -1,7 +1,7 @@
 <div  align="center">
     <img src="./docs/logo.png" alt="Version Manager Logo" title="Version Manager" width="200"/>
     <h1>Version Manager</h1>
-    <h3>A Version Manager GUI to manage node versions built with Tauri.</h3>
+    <h3>A Node JS Version Manager GUI tool made using Tauri.</h3>
 </div>
 
 > [!NOTE]
@@ -45,11 +45,8 @@
 ```
 <!-- Folder Structure store data -->
 AppData/Roaming/Version Manager/
-├── node/
-│   ├── v20.15.1
-│   ├── ... all downloader versions
-│   └── version-list.json
-├── bun/
-├── deno/
+├── v20.15.1
+├── ... all downloaded versions
+├── version-list.json
 └── config.json
 ```

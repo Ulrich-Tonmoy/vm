@@ -7,8 +7,7 @@ import {
   loadNodeVersionList,
 } from "@/libs";
 import { atom } from "jotai";
-import { toolsAtom } from "./config";
-import { selectedToolAtom } from "./app";
+import { nodeAtom } from "./config";
 
 export const nodeAllVersionAtom = atom<NodeVersionListModel[] | []>([]);
 export const nodeLtsVersionAtom = atom<NodeVersionListModel[] | []>([]);
@@ -33,11 +32,9 @@ export const loadNodeVersionAtom = atom(
       stable = all.filter((data: NodeVersionListModel) => isStable(data));
       unstable = all.filter((data: NodeVersionListModel) => isUnstable(data));
 
-      const tools = get(toolsAtom);
-      const selectedTool = get(selectedToolAtom);
-      const selectedConfig = tools[selectedTool!];
+      const node = get(nodeAtom);
 
-      const installedSet = new Set(selectedConfig.installed);
+      const installedSet = new Set(node.installed);
       const ltsVersions = lts.filter((v) => !installedSet.has(v.version));
       const currentVersions = current.filter((v) => !installedSet.has(v.version));
       const stableVersions = stable.filter((v) => !installedSet.has(v.version));

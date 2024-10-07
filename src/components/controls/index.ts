@@ -1,2 +1,2 @@
-export * from "./Titlebar";
+export * from "./Control";
 export * from "./settings";

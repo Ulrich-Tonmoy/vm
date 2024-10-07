@@ -12,7 +12,7 @@ import {
   downloadingVersionAtom,
   loadNodeVersionAtom,
   toastIdAtom,
-  toolsAtom,
+  nodeAtom,
   updateConfigAtom,
   updateDownloadingAtom,
 } from "@/store";
@@ -32,7 +32,7 @@ export const ListItem = ({ versionInfo }: ListItemProps) => {
   const toastId = useAtomValue(toastIdAtom);
   const downloadingProgress = useAtomValue(downloadingProgressAtom);
   const updateDownloading = useSetAtom(updateDownloadingAtom);
-  const tools = useAtomValue(toolsAtom);
+  const node = useAtomValue(nodeAtom);
   const updateConfig = useSetAtom(updateConfigAtom);
 
   const downloadFile = async () => {
@@ -79,8 +79,8 @@ export const ListItem = ({ versionInfo }: ListItemProps) => {
         );
         updateConfig({
           Node: {
-            active: tools.Node.active,
-            installed: [...tools.Node.installed, downloadingVersion],
+            active: node.active,
+            installed: [...node.installed, downloadingVersion],
           },
         });
 

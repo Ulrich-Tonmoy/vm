@@ -1,17 +1,17 @@
 import {
   CONFIG_FILE_NAME,
+  ConfigNodeModel,
   ConfigModel,
   dataDirPath,
   INITIAL_CONFIG,
   readFile,
   StoreConfigModel,
-  StoreToolsModel,
   writeFile,
 } from "@/libs";
 import { atom } from "jotai";
 
 export const configAtom = atom<ConfigModel>(INITIAL_CONFIG);
-export const toolsAtom = atom<StoreToolsModel>(INITIAL_CONFIG);
+export const nodeAtom = atom<ConfigNodeModel>(INITIAL_CONFIG.Node);
 export const themeAtom = atom<string>(INITIAL_CONFIG.theme);
 export const fontFamilyAtom = atom<string>(INITIAL_CONFIG.fontFamily);
 
@@ -24,13 +24,9 @@ export const updateConfigAtom = atom(null, async (get, set, config: StoreConfigM
 
   if (config.theme) set(themeAtom, config.theme);
   if (config.fontFamily) set(fontFamilyAtom, config.fontFamily);
-  if (config.Node || config.Bun || config.Deno) {
-    const tools = {
-      Node: config.Node ?? INITIAL_CONFIG.Node,
-      Bun: config.Bun ?? INITIAL_CONFIG.Bun,
-      Deno: config.Deno ?? INITIAL_CONFIG.Deno,
-    };
-    set(toolsAtom, tools);
+  if (config.Node) {
+    const tools = config.Node ?? INITIAL_CONFIG.Node;
+    set(nodeAtom, tools);
   }
 
   await writeFile(dirPath, CONFIG_FILE_NAME, JSON.stringify(newConfig));
@@ -43,15 +39,12 @@ export const loadConfigAtom = atom(null, async (_, set) => {
       let config: ConfigModel = JSON.parse(res);
       config = {
         Node: config.Node ?? INITIAL_CONFIG.Node,
-        Bun: config.Bun ?? INITIAL_CONFIG.Bun,
-        Deno: config.Deno ?? INITIAL_CONFIG.Deno,
         theme: config.theme ?? INITIAL_CONFIG.theme,
         fontFamily: config.fontFamily ?? INITIAL_CONFIG.fontFamily,
       };
 
-      const tools = { Node: config.Node, Bun: config.Bun, Deno: config.Deno };
       set(configAtom, config);
-      set(toolsAtom, tools);
+      set(nodeAtom, config.Node);
       set(themeAtom, config.theme);
       set(fontFamilyAtom, config.fontFamily);
     }

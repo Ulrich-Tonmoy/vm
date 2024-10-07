@@ -1,10 +1,4 @@
-import {
-  toolsAtom,
-  searchTermAtom,
-  selectedToolAtom,
-  loadNodeVersionAtom,
-  updateConfigAtom,
-} from "@/store";
+import { nodeAtom, searchTermAtom, loadNodeVersionAtom, updateConfigAtom } from "@/store";
 import { CheckIcon, ExitIcon, TrashIcon } from "@radix-ui/react-icons";
 import { useAtomValue, useSetAtom } from "jotai";
 import { Button } from "@/components/Button";
@@ -21,23 +15,21 @@ import {
 
 export const Installed = () => {
   const searchTerm = useAtomValue(searchTermAtom);
-  const selectedTool = useAtomValue(selectedToolAtom);
-  const tools = useAtomValue(toolsAtom);
-  const selectedConfig = tools[selectedTool!];
+  const node = useAtomValue(nodeAtom);
   const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
   const updateConfig = useSetAtom(updateConfigAtom);
 
-  const items = selectedConfig.installed
+  const items = node.installed
     .filter((v) => v.includes(searchTerm))
     .sort((a, b) => {
-      if (a === selectedConfig.active) return -1;
-      if (b === selectedConfig.active) return 1;
+      if (a === node.active) return -1;
+      if (b === node.active) return 1;
       return 0;
     });
 
   const useVersion = async (version: string) => {
     const path = await dataDirPath();
-    const active = selectedConfig.active;
+    const active = node.active;
     if (active) {
       removeFromPath([NODE_INSTALLED_PATH(path, active)]);
     }
@@ -45,7 +37,7 @@ export const Installed = () => {
     updateConfig({
       Node: {
         active: version,
-        installed: [...tools.Node.installed],
+        installed: [...node.installed],
       },
     });
     loadNodeVersion(false);
@@ -59,10 +51,10 @@ export const Installed = () => {
     const path = await dataDirPath();
     const res = await deleteFolder(NODE_INSTALLED_PATH(path, version));
     if (res === FileSysRes.OK) {
-      const newTools = tools.Node.installed.filter((v) => v !== version);
+      const newTools = node.installed.filter((v) => v !== version);
       updateConfig({
         Node: {
-          active: tools.Node.active,
+          active: node.active,
           installed: [...newTools],
         },
       });
@@ -80,7 +72,7 @@ export const Installed = () => {
     updateConfig({
       Node: {
         active: "",
-        installed: [...tools.Node.installed],
+        installed: [...node.installed],
       },
     });
     loadNodeVersion(false);
@@ -96,12 +88,12 @@ export const Installed = () => {
         Installed
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2 ml-8 md:m-0">
-        {selectedConfig.installed.length === 0 ? (
+        {node.installed.length === 0 ? (
           <div
             className="p-4 text-orange-700 bg-orange-100 border-l-4 border-orange-500"
             role="alert"
           >
-            <p className="font-bold">No version is installed for {selectedTool}</p>
+            <p className="font-bold">No version is installed.</p>
             <p>Try installing a version from the available list.</p>
           </div>
         ) : (
@@ -111,7 +103,7 @@ export const Installed = () => {
               className="flex items-center justify-center p-1 px-2 rounded-md text-md lg:text-2xl bg-card shadow-md gap-x-2"
             >
               <span className="cursor-text select-text">{i}</span>
-              {selectedConfig.active === i ? (
+              {node.active === i ? (
                 <>
                   <Button
                     variant="ghost"
