@@ -50,3 +50,5 @@ AppData/Roaming/Version Manager/
 ├── version-list.json
 └── config.json
 ```
+
+<!-- https://github.com/1111mp/nvm-desktop -->
