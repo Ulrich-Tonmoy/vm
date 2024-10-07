@@ -21,7 +21,7 @@ export const Available = () => {
         <Button
           variant="outline"
           size="icon"
-          content={<SymbolIcon className="size-8" />}
+          content={<SymbolIcon className="size-8 p-1" />}
           tooltip="Refresh The list"
           onClick={() => refreshAvailableVersion(true)}
         />
@@ -33,7 +33,9 @@ export const Available = () => {
             role="alert"
           >
             <p className="font-bold">No List available for Node to install</p>
-            <p>Try refreshing the list.</p>
+            <p className="flex justify-center items-center">
+              Try refreshing the list using <SymbolIcon className="size-5 ml-2" />.
+            </p>
           </div>
         ) : (
           <div className="flex flex-col">

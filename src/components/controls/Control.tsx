@@ -28,9 +28,15 @@ export const Control = () => {
 
   return (
     <div
-      className="fixed top-0 right-0 flex items-center justify-between"
+      className="fixed top-0 left-0 right-0 flex items-center justify-between shadow-sm"
       data-tauri-drag-region
     >
+      <div className="flex">
+        <span className="pl-1 text-xl font-black flex justify-center items-center">
+          <img src="/node.png" alt="node logo" className="w-8 h-6 pr-2" />
+          Node JS Version Manager
+        </span>
+      </div>
       <div className="flex items-center">
         <Settings />
         <TooltipProvider>

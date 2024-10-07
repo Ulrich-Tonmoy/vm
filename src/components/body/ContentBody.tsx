@@ -24,12 +24,6 @@ export const ContentBody = () => {
     <div className="flex-1 overflow-auto">
       <div className="flex flex-col pb-10 mt-8 mb-16 space-y-4">
         <div className="flex flex-col items-center justify-center gap-4">
-          <div className="flex">
-            <span className="p-1 px-3 m-1 mx-3 text-xl font-black rounded-md lg:text-4xl text-card-foreground bg-card shadow-md flex justify-center items-center">
-              <img src="/node.png" alt="node logo" className="w-8 h-6 pr-2" />
-              Node JS Version Manager
-            </span>
-          </div>
           <div className="flex text-sm rounded-lg items-center bg-input w-[90%] lg:w-[80vw] h-12 shadow-md">
             <MagnifyingGlassIcon className="right-0 ml-1 size-8" />
             <input
