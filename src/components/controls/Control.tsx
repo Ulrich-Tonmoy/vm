@@ -1,4 +1,4 @@
-import { appWindow } from "@tauri-apps/api/window";
+import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { useState } from "react";
 import {
   Tooltip,
@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { CopyIcon, Cross1Icon, MinusIcon, SquareIcon } from "@radix-ui/react-icons";
 import { Settings } from "./settings";
+const appWindow = getCurrentWebviewWindow()
 
 export const Control = () => {
   const [isMaximized, setIsMaximized] = useState(false);

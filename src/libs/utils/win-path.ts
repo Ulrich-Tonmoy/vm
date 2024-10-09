@@ -1,4 +1,4 @@
-import { invoke } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
 import { DEFAULT_REMOVE_FROM_PATH } from "../constants";
 
 export const setToPath = (path: string) => {

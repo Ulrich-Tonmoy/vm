@@ -1,4 +1,4 @@
-import { ResponseType, fetch } from "@tauri-apps/api/http";
+import { fetch } from "@tauri-apps/plugin-http";
 import { showToaster } from "../utils";
 import { ToasterType } from "../enums";
 import { NODE_BASE_URL } from "../constants";
@@ -11,18 +11,17 @@ export const fetchNodeVersionList = async (): Promise<NodeVersionListModel[]> =>
       "Content-Type": "application/json",
       "User-Agent": "Version Manager",
     },
-    responseType: ResponseType.JSON,
   });
 
-  const resJson = await response;
+  const resJson = await response.json();
 
-  if (resJson.ok) {
+  if (response.ok) {
     showToaster({
       msg: "Successfully Fetch the Node Version List.",
       type: ToasterType.SUCCESS,
     });
 
-    return resJson.data as NodeVersionListModel[];
+    return resJson as NodeVersionListModel[];
   } else {
     showToaster({
       msg: "Failed to fetch the Node Version List.",

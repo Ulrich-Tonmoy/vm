@@ -17,7 +17,7 @@ import {
   updateDownloadingAtom,
 } from "@/store";
 import { DownloadIcon } from "@radix-ui/react-icons";
-import { invoke } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
