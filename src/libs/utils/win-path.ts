@@ -37,6 +37,9 @@ export const removeFromPath = (pathToRemove: string[] = DEFAULT_REMOVE_FROM_PATH
       pathToRemove.forEach((prev) => {
         newPath = newPath.replace(prev, "");
       });
+      if (newPath.endsWith(";")) {
+        newPath = newPath.slice(0, -1);
+      }
     }
 
     invoke("set_user_path", { newPath }).then((message: unknown) => {
