@@ -14,4 +14,6 @@ export const INITIAL_CONFIG: ConfigModel = {
 };
 
 export const LIST_LIMIT = 20;
-export const DEFAULT_REMOVE_FROM_PATH = ["%NVM_SYMLINK%;", "C:\\Program Files\\nodejs;"];
+// TODO: remove before release build
+// export const DEFAULT_REMOVE_FROM_PATH = ["%NVM_SYMLINK%;", "C:\\Program Files\\nodejs;"];
+export const DEFAULT_REMOVE_FROM_PATH = [];
