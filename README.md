@@ -7,12 +7,16 @@
 > [!NOTE]
 >
 > ### [Download For Windows From Here](https://github.com/Ulrich-Tonmoy/vm/releases)
->
-> ### [Features lists here](./docs/v-features.md)
 
 <div  align="center">
     <img src="./docs/vm.png" alt="Version Manager"/>
 </div>
+
+### Features
+
+- [x] Show LTS, Current, Stable and Unstable old available Node Version.
+- [x] Download/install Multiple Node versions.
+- [x] Change Node version from the installed/downloaded version.
 
 ### Technologies
 

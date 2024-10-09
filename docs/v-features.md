@@ -1,6 +1,8 @@
 ### 0.0.3:
 
-- [x] Cleanup.
+- [x] Cleanup unused code and resources.
+- [x] Delete Confirmation Added.
+- [x] Migrated from Tauri to Tauri 2.0.
 
 ### 0.0.2:
 
