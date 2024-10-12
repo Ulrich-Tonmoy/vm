@@ -19,6 +19,9 @@ export const setToPath = (path: string) => {
     if (!newPath.includes(path)) {
       newPath += path;
     }
+    if (!newPath.endsWith(";")) {
+      newPath += ";";
+    }
 
     invoke("set_user_path", { newPath }).then((message: unknown) => {
       const msg = message as string;
@@ -35,11 +38,11 @@ export const removeFromPath = (pathToRemove: string[] = DEFAULT_REMOVE_FROM_PATH
     let newPath = paths;
     if (pathToRemove.length > 0) {
       pathToRemove.forEach((prev) => {
+        if (!prev.endsWith(";")) {
+          prev += ";";
+        }
         newPath = newPath.replace(prev, "");
       });
-      if (newPath.endsWith(";")) {
-        newPath = newPath.slice(0, -1);
-      }
     }
 
     invoke("set_user_path", { newPath }).then((message: unknown) => {
