@@ -1,4 +1,4 @@
-import { invoke } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
 import { DEFAULT_REMOVE_FROM_PATH } from "../constants";
 
 export const setToPath = (path: string) => {
@@ -19,6 +19,9 @@ export const setToPath = (path: string) => {
     if (!newPath.includes(path)) {
       newPath += path;
     }
+    if (!newPath.endsWith(";")) {
+      newPath += ";";
+    }
 
     invoke("set_user_path", { newPath }).then((message: unknown) => {
       const msg = message as string;
@@ -35,6 +38,9 @@ export const removeFromPath = (pathToRemove: string[] = DEFAULT_REMOVE_FROM_PATH
     let newPath = paths;
     if (pathToRemove.length > 0) {
       pathToRemove.forEach((prev) => {
+        if (!prev.endsWith(";")) {
+          prev += ";";
+        }
         newPath = newPath.replace(prev, "");
       });
     }

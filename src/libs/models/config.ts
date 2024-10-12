@@ -1,26 +1,16 @@
 export interface ConfigModel {
-  Node: ConfigGeneralObject;
-  Bun: ConfigGeneralObject;
-  Deno: ConfigGeneralObject;
+  Node: ConfigNodeModel;
   theme: string;
   fontFamily: string;
 }
 
-export interface StoreToolsModel {
-  Node: ConfigGeneralObject;
-  Bun: ConfigGeneralObject;
-  Deno: ConfigGeneralObject;
-}
-
 export interface StoreConfigModel {
-  Node?: ConfigGeneralObject;
-  Bun?: ConfigGeneralObject;
-  Deno?: ConfigGeneralObject;
+  Node?: ConfigNodeModel;
   theme?: string;
   fontFamily?: string;
 }
 
-export interface ConfigGeneralObject {
+export interface ConfigNodeModel {
   active: string;
   installed: string[];
 }

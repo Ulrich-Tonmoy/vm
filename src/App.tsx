@@ -1,4 +1,4 @@
-import { ContentBody, ContentLayout, TitleBar } from "@/components";
+import { ContentBody, ContentLayout, Control } from "@/components";
 import { useAtomValue, useSetAtom } from "jotai";
 import { fontFamilyAtom, loadConfigAtom } from "@/store";
 import { useEffect } from "react";
@@ -23,7 +23,7 @@ function App() {
       )}
     >
       <ThemeProvider defaultTheme="system">
-        <TitleBar />
+        <Control />
         <ContentLayout>
           <ContentBody />
         </ContentLayout>

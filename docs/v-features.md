@@ -1,3 +1,9 @@
+### 0.0.3:
+
+- [x] Cleanup unused code and resources.
+- [x] Delete Confirmation Added.
+- [x] Migrated from Tauri to Tauri 2.0.
+
 ### 0.0.2:
 
 - [x] check if node js path exist to remove from the path.

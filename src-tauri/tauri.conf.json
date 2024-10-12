@@ -2,31 +2,21 @@
   "build": {
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist"
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420"
   },
-  "package": {
-    "productName": "Version Manager",
-    "version": "0.0.2"
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": ["icons/logo.png", "icons/logo.ico"]
   },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": true,
-        "open": true
-      },
-      "path": { "all": true },
-      "fs": {
-        "all": true,
-        "scope": ["**"]
-      },
-      "http": {
-        "all": true,
-        "scope": ["https://**"]
-      },
-      "window": { "all": true },
-      "dialog": { "all": true }
+  "productName": "Version Manager",
+  "mainBinaryName": "Version Manager",
+  "version": "0.0.3",
+  "identifier": "version-manager",
+  "app": {
+    "security": {
+      "csp": null
     },
     "windows": [
       {
@@ -41,15 +31,6 @@
         "titleBarStyle": "Visible",
         "transparent": true
       }
-    ],
-    "security": {
-      "csp": null
-    },
-    "bundle": {
-      "active": true,
-      "targets": "all",
-      "identifier": "version-manager",
-      "icon": ["icons/logo.png", "icons/logo.ico"]
-    }
+    ]
   }
 }

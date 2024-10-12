@@ -1,12 +1,11 @@
-import { searchTermAtom, selectedToolAtom, updateSearchTermAtom } from "@/store";
+import { searchTermAtom, updateSearchTermAtom } from "@/store";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useCallback } from "react";
-import { debounce, ToolType } from "@/libs";
+import { debounce } from "@/libs";
 import { Cross1Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { Node } from "./node";
+import { Installed, Available } from "..";
 
 export const ContentBody = () => {
-  const selectedTool = useAtomValue(selectedToolAtom);
   const searchTerm = useAtomValue(searchTermAtom);
   const updateSearchTerm = useSetAtom(updateSearchTermAtom);
 
@@ -17,8 +16,6 @@ export const ContentBody = () => {
     [],
   );
 
-  if (!selectedTool) return;
-
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     debouncedSearch(event.target.value);
   };
@@ -27,11 +24,6 @@ export const ContentBody = () => {
     <div className="flex-1 overflow-auto">
       <div className="flex flex-col pb-10 mt-8 mb-16 space-y-4">
         <div className="flex flex-col items-center justify-center gap-4">
-          <div className="flex">
-            <span className="p-1 px-3 m-1 mx-3 text-xl font-black rounded-md lg:text-4xl text-card-foreground bg-card shadow-md">
-              {selectedTool} Version Manager
-            </span>
-          </div>
           <div className="flex text-sm rounded-lg items-center bg-input w-[90%] lg:w-[80vw] h-12 shadow-md">
             <MagnifyingGlassIcon className="right-0 ml-1 size-8" />
             <input
@@ -50,16 +42,8 @@ export const ContentBody = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-around h-full px-2">
-          {selectedTool === ToolType.NODE ? (
-            <Node />
-          ) : (
-            <div
-              className="p-4 text-orange-700 bg-orange-100 border-l-4 border-orange-500"
-              role="alert"
-            >
-              <p className="font-bold">Under Construction</p>
-            </div>
-          )}
+          <Installed />
+          <Available />
         </div>
       </div>
     </div>

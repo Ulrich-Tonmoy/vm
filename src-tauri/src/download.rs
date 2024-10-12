@@ -3,8 +3,8 @@ use std::fs::{File, OpenOptions};
 use std::io::Write;
 use std::sync::{Arc, Mutex};
 use tauri::async_runtime::channel;
-use tauri::Manager;
 use tauri::State;
+use tauri::{Emitter, Manager};
 use tokio::fs;
 use zip::read::ZipArchive;
 
@@ -116,7 +116,8 @@ pub async fn download_and_unzip<R: tauri::Runtime>(
 
     tauri::async_runtime::spawn(async move {
         while let Some(progress) = rx.recv().await {
-            app_handle.emit_all("download_progress", progress).unwrap();
+            let window = app_handle.get_webview_window("main").unwrap();
+            window.emit("download_progress", progress).unwrap();
         }
     });
 
