@@ -6,7 +6,9 @@
 
 > [!NOTE]
 >
-> ### [Download For Windows From Here](https://github.com/Ulrich-Tonmoy/vm/releases)
+> [Download For Windows From Here](https://github.com/Ulrich-Tonmoy/vm/releases)
+>
+> [nvm-desktop (Better alternative)](https://github.com/1111mp/nvm-desktop)
 
 <div  align="center">
     <img src="./docs/vm.png" alt="Version Manager"/>
@@ -17,6 +19,8 @@
 - [x] Show LTS, Current, Stable and Unstable old available Node Version.
 - [x] Download/install Multiple Node versions.
 - [x] Change Node version from the installed/downloaded version.
+- [x] Change Theme dark/light/system
+- [x] Change font Monaspace {Argon, Krypton, Neon, Radon, Xenon}
 
 ### Technologies
 
@@ -54,5 +58,3 @@ AppData/Roaming/Version Manager/
 ├── version-list.json
 └── config.json
 ```
-
-<!-- https://github.com/1111mp/nvm-desktop -->
