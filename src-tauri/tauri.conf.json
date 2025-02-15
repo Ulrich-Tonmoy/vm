@@ -12,7 +12,7 @@
   },
   "productName": "Version Manager",
   "mainBinaryName": "Version Manager",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "identifier": "version-manager",
   "app": {
     "security": {

@@ -1,3 +1,9 @@
+### 0.0.4:
+
+- [x] Migrate from Tailwind css v3 to v4.
+- [x] Upgrade deps to latest and fix window resizing.
+- [x] Revamp the UI.
+
 ### 0.0.3:
 
 - [x] Cleanup unused code and resources.
