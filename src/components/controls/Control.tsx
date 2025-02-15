@@ -1,5 +1,4 @@
-import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Tooltip,
   TooltipContent,
@@ -8,24 +7,27 @@ import {
 } from "@/components/ui/tooltip";
 import { CopyIcon, Cross1Icon, MinusIcon, SquareIcon } from "@radix-ui/react-icons";
 import { Settings } from "./settings";
-const appWindow = getCurrentWebviewWindow()
+import { getCurrentWindow } from "@tauri-apps/api/window";
 
 export const Control = () => {
+  const appWindow = getCurrentWindow();
   const [isMaximized, setIsMaximized] = useState(false);
-
-  const onMinimize = () => appWindow.minimize();
 
   const onScaleUp = () => {
     appWindow.toggleMaximize();
     setIsMaximized(true);
   };
-
   const onScaleDown = () => {
     appWindow.toggleMaximize();
     setIsMaximized(false);
   };
 
-  const onClose = () => appWindow.close();
+  useEffect(() => {
+    const checkMaximized = async () => {
+      setIsMaximized(await appWindow.isMaximized());
+    };
+    checkMaximized();
+  }, []);
 
   return (
     <div
@@ -45,7 +47,9 @@ export const Control = () => {
             <TooltipTrigger>
               <MinusIcon
                 className="px-2 py-1 text-center cursor-pointer size-8 hover:bg-border hover:rounded-md"
-                onClick={() => onMinimize()}
+                onClick={() => {
+                  appWindow.minimize();
+                }}
               />
             </TooltipTrigger>
             <TooltipContent>
@@ -87,7 +91,9 @@ export const Control = () => {
             <TooltipTrigger>
               <Cross1Icon
                 className="px-2 py-1 text-center cursor-pointer size-8 hover:bg-red-500 hover:rounded-md"
-                onClick={onClose}
+                onClick={() => {
+                  appWindow.close();
+                }}
               />
             </TooltipTrigger>
             <TooltipContent>

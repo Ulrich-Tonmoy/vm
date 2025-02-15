@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -92,28 +92,24 @@
 
 @layer utilities {
   @font-face {
-    font-family: 'Argon';
-    src: url('/fonts/MonaspaceArgonVarVF[wght,wdth,slnt].ttf')
-      format('truetype');
+    font-family: "Argon";
+    src: url("/fonts/MonaspaceArgonVarVF[wght,wdth,slnt].ttf") format("truetype");
   }
   @font-face {
-    font-family: 'Krypton';
-    src: url('/fonts/MonaspaceKryptonVarVF[wght,wdth,slnt].ttf')
-      format('truetype');
+    font-family: "Krypton";
+    src: url("/fonts/MonaspaceKryptonVarVF[wght,wdth,slnt].ttf") format("truetype");
   }
   @font-face {
-    font-family: 'Neon';
-    src: url('/fonts/MonaspaceNeonVarVF[wght,wdth,slnt].ttf') format('truetype');
+    font-family: "Neon";
+    src: url("/fonts/MonaspaceNeonVarVF[wght,wdth,slnt].ttf") format("truetype");
   }
   @font-face {
-    font-family: 'Radon';
-    src: url('/fonts/MonaspaceRadonVarVF[wght,wdth,slnt].ttf')
-      format('truetype');
+    font-family: "Radon";
+    src: url("/fonts/MonaspaceRadonVarVF[wght,wdth,slnt].ttf") format("truetype");
   }
   @font-face {
-    font-family: 'Xenon';
-    src: url('/fonts/MonaspaceXenonVarVF[wght,wdth,slnt].ttf')
-      format('truetype');
+    font-family: "Xenon";
+    src: url("/fonts/MonaspaceXenonVarVF[wght,wdth,slnt].ttf") format("truetype");
   }
 }
 
