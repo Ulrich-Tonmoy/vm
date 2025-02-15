@@ -17,6 +17,10 @@
       "identifier": "fs:scope",
       "allow": ["**"]
     },
-    "dialog:default"
+    "dialog:default",
+    {
+      "identifier": "http:default",
+      "allow": [{ "url": "https://**" }]
+    }
   ]
 }
