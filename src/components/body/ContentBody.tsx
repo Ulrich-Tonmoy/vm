@@ -30,7 +30,7 @@ export const ContentBody = () => {
               value={searchTerm}
               onChange={handleSearchChange}
               type="text"
-              className="w-full h-full px-2 text-lg rounded-lg text-foreground bg-input placeholder-secondary-foreground focus:outline-none"
+              className="w-full h-full px-2 text-lg rounded-lg text-foreground bg-input placeholder-secondary-foreground focus:outline-hidden"
               placeholder="Search version ie: 18.1"
             />
             {searchTerm && (

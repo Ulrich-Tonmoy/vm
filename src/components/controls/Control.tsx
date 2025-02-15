@@ -29,7 +29,7 @@ export const Control = () => {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 flex items-center justify-between shadow-sm"
+      className="fixed top-0 left-0 right-0 flex items-center justify-between shadow-xs"
       data-tauri-drag-region
     >
       <div className="flex">
