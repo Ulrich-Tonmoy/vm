@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeProvider } from "@/components";
 import { cn } from "@/libs";
+import DemoPage from "@/components/payments/page";
 
 function App() {
   const loadConfig = useSetAtom(loadConfigAtom);
@@ -25,7 +26,8 @@ function App() {
       <ThemeProvider defaultTheme="system">
         <Control />
         <ContentLayout>
-          <ContentBody />
+          {/* <ContentBody /> */}
+          <DemoPage />
         </ContentLayout>
         <ToastContainer
           position="bottom-right"

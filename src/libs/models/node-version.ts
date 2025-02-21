@@ -1,6 +1,6 @@
 export interface NodeVersionListModel {
   version: string;
-  dater: string;
+  date: string;
   filses: Array<string>;
   npm: string;
   v8: string;
@@ -9,6 +9,8 @@ export interface NodeVersionListModel {
   openssl: string;
   modules: string;
   lts: boolean | string;
+  type?: "LTS" | "Current" | "Stable" | "Unstable";
+  status?: "Active" | "Installed";
   security: boolean;
 }
 

@@ -1,11 +1,4 @@
-import {
-  NodeVersionListModel,
-  isCurrent,
-  isLTS,
-  isStable,
-  isUnstable,
-  loadNodeVersionList,
-} from "@/libs";
+import { NodeVersionListModel, isUnstable, loadNodeVersionList } from "@/libs";
 import { atom } from "jotai";
 import { nodeAtom } from "./config";
 
@@ -19,31 +12,26 @@ export const loadNodeVersionAtom = atom(
   null,
   async (get, set, isRefresh: boolean = false) => {
     const all = await loadNodeVersionList(isRefresh);
-    let lts: NodeVersionListModel[] | [] = [];
-    let current: NodeVersionListModel[] | [] = [];
-    let stable: NodeVersionListModel[] | [] = [];
-    let unstable: NodeVersionListModel[] | [] = [];
 
     set(nodeAllVersionAtom, all);
 
     if (all.length > 0) {
-      lts = all.filter((data: NodeVersionListModel) => isLTS(data));
-      current = all.filter((data: NodeVersionListModel) => isCurrent(data));
-      stable = all.filter((data: NodeVersionListModel) => isStable(data));
-      unstable = all.filter((data: NodeVersionListModel) => isUnstable(data));
+      all.filter((data: NodeVersionListModel) => isUnstable(data));
 
       const node = get(nodeAtom);
 
       const installedSet = new Set(node.installed);
-      const ltsVersions = lts.filter((v) => !installedSet.has(v.version));
-      const currentVersions = current.filter((v) => !installedSet.has(v.version));
-      const stableVersions = stable.filter((v) => !installedSet.has(v.version));
-      const unStableVersions = unstable.filter((v) => !installedSet.has(v.version));
+      const active = node.active;
 
-      set(nodeLtsVersionAtom, ltsVersions);
-      set(nodeCurrentVersionAtom, currentVersions);
-      set(nodeStableVersionAtom, stableVersions);
-      set(nodeUnStableVersionAtom, unStableVersions);
+      all.filter((v: NodeVersionListModel) => {
+        if (installedSet.has(v.version)) {
+          v.status = "Installed";
+        }
+
+        if (active === v.version) {
+          v.status = "Active";
+        }
+      });
     }
   },
 );
