@@ -1,5 +1,4 @@
 import { ColumnDef } from "@tanstack/react-table";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,7 +7,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import {
   dataDirPath,
   deleteFolder,
@@ -35,90 +34,67 @@ import {
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { useEffect } from "react";
+import { ColumnFilter } from "./ColumnFilter";
 
 export const Column: ColumnDef<NodeVersionListModel>[] = [
   {
     accessorKey: "version",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Version
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <ColumnFilter column={column} title="Version" />
+    ),
+    enableMultiSort: true,
   },
   {
     accessorKey: "date",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Date
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <ColumnFilter column={column} title="Date" />
+    ),
+    enableMultiSort: true,
   },
   {
     accessorKey: "npm",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          NPM
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <ColumnFilter column={column} title="NPM" />
+    ),
+    enableMultiSort: true,
   },
   {
     accessorKey: "v8",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          V8
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <ColumnFilter column={column} title="V8" />
+    ),
+    enableMultiSort: true,
   },
   {
     accessorKey: "type",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Type
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
+    header: ({ column }) => (
+      <ColumnFilter
+        column={column}
+        title="Type"
+        filterValues={["LTS", "Current", "Stable", "Unstable"]}
+      />
+    ),
+    enableMultiSort: true,
+    filterFn: (row, id, filterValues: string[]) => {
+      if (!filterValues?.length) return true;
+      const value = row.getValue(id) as string;
+      return filterValues.includes(value);
     },
   },
   {
     accessorKey: "status",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Status
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
+    header: ({ column }) => (
+      <ColumnFilter
+        column={column}
+        title="Status"
+        filterValues={["Active", "Installed"]}
+      />
+    ),
+    enableMultiSort: true,
+    filterFn: (row, id, filterValues: string[]) => {
+      if (!filterValues?.length) return true;
+      const value = row.getValue(id) as string;
+      return filterValues.includes(value);
     },
   },
   {
