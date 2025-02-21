@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/libs";
+import { Pagination } from "./Pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -42,6 +43,7 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const PAGE_SIZE = 15;
 
   const table = useReactTable({
     data,
@@ -53,6 +55,11 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+        pageSize: PAGE_SIZE,
+      },
+    },
     state: {
       sorting,
       columnFilters,
@@ -95,6 +102,16 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+      </div>
+      <div>
+        <div className="text-sm text-muted-foreground">
+          {table.getState().pagination.pageIndex * PAGE_SIZE + 1}-
+          {Math.min(
+            (table.getState().pagination.pageIndex + 1) * PAGE_SIZE,
+            table.getFilteredRowModel().rows.length,
+          )}{" "}
+          of {table.getFilteredRowModel().rows.length} items
+        </div>
       </div>
       <div className="rounded-md border border-border outline-ring/50">
         <Table>
@@ -147,24 +164,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+      <Pagination table={table} pageSize={PAGE_SIZE} />
     </div>
   );
 }
