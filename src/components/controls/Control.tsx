@@ -31,7 +31,7 @@ export const Control = () => {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 flex items-center justify-between shadow-xs"
+      className="fixed top-0 left-0 right-0 flex items-center justify-between shadow-sm shadow-border bg-background z-50"
       data-tauri-drag-region
     >
       <div className="flex">

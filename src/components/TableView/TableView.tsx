@@ -1,11 +1,11 @@
 import { getNodeVersionList, VersionType } from "@/libs";
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
+import { DataTable } from "./DataTable";
 import { useEffect } from "react";
 import { useSetAtom } from "jotai";
 import { loadNodeVersionAtom } from "@/store";
+import { Column } from "@/components/TableView/Column";
 
-export default function DemoPage() {
+export default function TableView() {
   const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
   const all = getNodeVersionList(VersionType.DEFAULT);
 
@@ -17,9 +17,5 @@ export default function DemoPage() {
     refreshAvailableVersion(false);
   }, []);
 
-  return (
-    <div className="container mx-auto py-10 overflow-auto">
-      <DataTable columns={columns} data={all} />
-    </div>
-  );
+  return <DataTable columns={Column} data={all} />;
 }

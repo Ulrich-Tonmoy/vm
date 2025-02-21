@@ -36,7 +36,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { useEffect } from "react";
 
-export const columns: ColumnDef<NodeVersionListModel>[] = [
+export const Column: ColumnDef<NodeVersionListModel>[] = [
   {
     accessorKey: "version",
     header: ({ column }) => {
