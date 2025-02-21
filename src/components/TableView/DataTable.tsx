@@ -28,6 +28,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/libs";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -121,7 +122,16 @@ export function DataTable<TData, TValue>({
                   className="border-border outline-ring/50"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="pl-5">
+                    <TableCell
+                      key={cell.id}
+                      className={cn(
+                        "pl-5",
+                        cell.column.id === "status" &&
+                          (row.original as any).status === "Active"
+                          ? "text-green-400"
+                          : "",
+                      )}
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
