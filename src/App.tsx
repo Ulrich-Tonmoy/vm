@@ -25,7 +25,7 @@ function App() {
     >
       <ThemeProvider defaultTheme="system">
         <Control />
-        <div className="container py-10">
+        <div className="p-10">
           <TableView />
         </div>
         <ToastContainer

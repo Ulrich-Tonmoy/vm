@@ -145,7 +145,7 @@ export function DataTable<TData, TValue>({
           of {table.getFilteredRowModel().rows.length} items
         </div>
       </div>
-      <div className="rounded-md border border-border outline-ring/50">
+      <div className="rounded-md border border-border outline-ring/50 w-fit lg:w-full">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
