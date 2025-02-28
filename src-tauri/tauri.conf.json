@@ -21,9 +21,9 @@
     "windows": [
       {
         "title": "Version Manager",
-        "width": 850,
+        "width": 950,
         "height": 600,
-        "minWidth": 850,
+        "minWidth": 450,
         "minHeight": 450,
         "center": true,
         "resizable": true,
