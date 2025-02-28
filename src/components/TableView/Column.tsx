@@ -44,17 +44,17 @@ export const Column: ColumnDef<NodeVersionListModel>[] = [
   },
   {
     accessorKey: "date",
-    header: ({ column }) => <ColumnFilter column={column} title="Date" />,
+    header: ({ column }) => <ColumnFilter column={column} title="Release Date" />,
     enableMultiSort: true,
   },
   {
     accessorKey: "npm",
-    header: ({ column }) => <ColumnFilter column={column} title="NPM" />,
+    header: ({ column }) => <ColumnFilter column={column} title="NPM Version" />,
     enableMultiSort: true,
   },
   {
     accessorKey: "v8",
-    header: ({ column }) => <ColumnFilter column={column} title="V8" />,
+    header: ({ column }) => <ColumnFilter column={column} title="V8 Version" />,
     enableMultiSort: true,
   },
   {
