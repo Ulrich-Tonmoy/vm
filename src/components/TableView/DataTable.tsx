@@ -171,17 +171,17 @@ export function DataTable<TData, TValue>({
                   className="border-border outline-ring/50"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className={cn(
-                        "pl-5",
-                        cell.column.id === "status" &&
-                          (row.original as any).status === "Active"
-                          ? "text-green-400"
-                          : "",
-                      )}
-                    >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    <TableCell key={cell.id} className="pl-5">
+                      <span
+                        className={cn(
+                          cell.column.id === "status" &&
+                            (row.original as any).status === "Active"
+                            ? "text-green-400 bg-green-400/20 p-2 rounded-md"
+                            : "",
+                        )}
+                      >
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </span>
                     </TableCell>
                   ))}
                 </TableRow>
