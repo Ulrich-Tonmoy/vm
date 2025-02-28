@@ -16,11 +16,9 @@
 
 ### Features
 
-- [x] Show LTS, Current, Stable and Unstable old available Node Version.
-- [x] Download/install Multiple Node versions.
-- [x] Change Node version from the installed/downloaded version.
-- [x] Change Theme dark/light/system
-- [x] Change font Monaspace {Argon, Krypton, Neon, Radon, Xenon}
+- [x] Search by version, sort and filter by version, release date, npm & v8 version, type (LTS, Current, Stable, Unstable) and status (Active, Installed).
+- [x] Simultaneously download and install multiple Node.js versions, and switch between them with ease.
+- [x] Change theme and font style (dark/light/system theme and monospace fonts such as Argon, Krypton, Neon, Radon, Xenon)
 
 ### Technologies
 
