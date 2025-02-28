@@ -35,7 +35,10 @@ export const Control = () => {
       data-tauri-drag-region
     >
       <div className="flex">
-        <span className="pl-1 text-xl font-black flex justify-center items-center">
+        <span
+          className="pl-1 text-xl font-black flex justify-center items-center"
+          data-tauri-drag-region
+        >
           <img src="/node.png" alt="node logo" className="w-8 h-6 pr-2" />
           Node JS Version Manager
         </span>
