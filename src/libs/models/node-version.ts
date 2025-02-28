@@ -13,10 +13,3 @@ export interface NodeVersionListModel {
   status?: "Active" | "Installed";
   security: boolean;
 }
-
-export interface NodeFilterVersionModel {
-  lts: NodeVersionListModel[];
-  current: NodeVersionListModel[];
-  stable: NodeVersionListModel[];
-  unstable: NodeVersionListModel[];
-}

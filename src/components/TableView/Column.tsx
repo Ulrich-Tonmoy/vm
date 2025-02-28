@@ -11,7 +11,6 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import {
   dataDirPath,
   deleteFolder,
-  FileSysRes,
   NODE_DOWNLOAD_URL,
   NODE_INSTALLED_PATH,
   NODE_UNZIP_FOLDER_NAME,
@@ -35,34 +34,27 @@ import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { useEffect } from "react";
 import { ColumnFilter } from "./ColumnFilter";
+import { ask } from "@tauri-apps/plugin-dialog";
 
 export const Column: ColumnDef<NodeVersionListModel>[] = [
   {
     accessorKey: "version",
-    header: ({ column }) => (
-      <ColumnFilter column={column} title="Version" />
-    ),
+    header: ({ column }) => <ColumnFilter column={column} title="Version" />,
     enableMultiSort: true,
   },
   {
     accessorKey: "date",
-    header: ({ column }) => (
-      <ColumnFilter column={column} title="Date" />
-    ),
+    header: ({ column }) => <ColumnFilter column={column} title="Date" />,
     enableMultiSort: true,
   },
   {
     accessorKey: "npm",
-    header: ({ column }) => (
-      <ColumnFilter column={column} title="NPM" />
-    ),
+    header: ({ column }) => <ColumnFilter column={column} title="NPM" />,
     enableMultiSort: true,
   },
   {
     accessorKey: "v8",
-    header: ({ column }) => (
-      <ColumnFilter column={column} title="V8" />
-    ),
+    header: ({ column }) => <ColumnFilter column={column} title="V8" />,
     enableMultiSort: true,
   },
   {
@@ -210,9 +202,19 @@ export const Column: ColumnDef<NodeVersionListModel>[] = [
       };
 
       const deleteVersion = async () => {
+        const confirmed = await ask(
+          `Are you sure you want to delete '${row.original.version}'?\nThis action cannot be reverted.`,
+          {
+            title: `Are you sure you want to delete '${row.original.version}'?`,
+            kind: "warning",
+          },
+        );
+
+        if (!confirmed) return false;
+
         const path = await dataDirPath();
         const res = await deleteFolder(NODE_INSTALLED_PATH(path, row.original.version));
-        if (res === FileSysRes.OK) {
+        if (res) {
           const newTools = node.installed.filter((v) => v !== row.original.version);
           updateConfig({
             Node: {

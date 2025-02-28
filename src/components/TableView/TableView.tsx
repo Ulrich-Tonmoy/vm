@@ -1,13 +1,12 @@
-import { getNodeVersionList, VersionType } from "@/libs";
 import { DataTable } from "./DataTable";
 import { useEffect } from "react";
-import { useSetAtom } from "jotai";
-import { loadNodeVersionAtom } from "@/store";
+import { useAtomValue, useSetAtom } from "jotai";
+import { loadNodeVersionAtom, nodeAllVersionAtom } from "@/store";
 import { Column } from "@/components/TableView/Column";
 
 export default function TableView() {
   const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
-  const all = getNodeVersionList(VersionType.DEFAULT);
+  const all = useAtomValue(nodeAllVersionAtom);
 
   const refreshAvailableVersion = async (isRefresh: boolean) => {
     await loadNodeVersion(isRefresh);

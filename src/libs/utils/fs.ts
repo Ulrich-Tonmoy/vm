@@ -1,4 +1,4 @@
-import { FileSysRes, CONFIG_FOLDER_NAME } from "@/libs";
+import { CONFIG_FOLDER_NAME } from "@/libs";
 import {
   mkdir,
   exists,
@@ -18,7 +18,7 @@ export const dataDirPath = async () => {
 export const readFile = async (filePath: string): Promise<string> => {
   const fileExist = await exists(filePath);
   if (!fileExist) {
-    return FileSysRes.ERROR;
+    return "";
   }
 
   const contents = await readTextFile(filePath);
@@ -29,16 +29,16 @@ export const writeFile = async (
   folderPath: string,
   fileName: string,
   content: string,
-): Promise<string> => {
+): Promise<boolean> => {
   const folderExist = await exists(folderPath);
   if (!folderExist) {
     await createFolder(folderPath);
   }
   await writeTextFile(folderPath + "/" + fileName, content);
-  return FileSysRes.OK;
+  return true;
 };
 
-export const deleteFile = async (filePath: string): Promise<string> => {
+export const deleteFile = async (filePath: string): Promise<boolean> => {
   const fileName = await basename(filePath);
 
   const confirmed = await ask(
@@ -49,30 +49,19 @@ export const deleteFile = async (filePath: string): Promise<string> => {
     },
   );
 
-  if (!confirmed) return FileSysRes.CANCEL;
+  if (!confirmed) return false;
   await remove(filePath);
-  return FileSysRes.OK;
+  return true;
 };
 
-export const createFolder = async (folderPath: string): Promise<string> => {
+export const createFolder = async (folderPath: string): Promise<boolean> => {
   await mkdir(folderPath, { recursive: true });
-  return FileSysRes.OK;
+  return true;
 };
 
-export const deleteFolder = async (dirPath: string): Promise<string> => {
-  // const folderName = await basename(dirPath);
-
-  // const confirmed = await ask(
-  //   `Are you sure you want to delete folder name '${folderName}'?\nThis action cannot be reverted.`,
-  //   {
-  //     title: `Are you sure you want to delete folder name '${folderName}'?`,
-  //     type: "warning",
-  //   },
-  // );
-
-  // if (!confirmed) return FileSysRes.CANCEL;
+export const deleteFolder = async (dirPath: string): Promise<boolean> => {
   await remove(dirPath, { recursive: true });
-  return FileSysRes.OK;
+  return true;
 };
 
 export const readDirectory = async (folderPath: string): Promise<any[]> => {

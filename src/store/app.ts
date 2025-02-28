@@ -1,13 +1,8 @@
 import { atom } from "jotai";
 
-export const searchTermAtom = atom<string>("");
 export const downloadingVersionAtom = atom<string>("");
 export const toastIdAtom = atom<number>(0);
 export const downloadingProgressAtom = atom<number>(0);
-
-export const updateSearchTermAtom = atom(null, async (_get, set, searchTerm: string) => {
-  set(searchTermAtom, searchTerm);
-});
 
 export const updateDownloadingAtom = atom(
   null,

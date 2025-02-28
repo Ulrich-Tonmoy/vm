@@ -1,6 +1,5 @@
 import { NODE_VERSION_LIST_FILE_NAME } from "@/libs/constants";
 import { dataDirPath, readFile, writeFile } from "../fs";
-import { FileSysRes } from "@/libs/enums";
 import { fetchNodeVersionList } from "@/libs/fetch";
 
 export const loadNodeVersionList = async (isRefresh: boolean) => {
@@ -9,7 +8,7 @@ export const loadNodeVersionList = async (isRefresh: boolean) => {
   const listPath = dirPath + "\\" + NODE_VERSION_LIST_FILE_NAME;
 
   const res = await readFile(listPath);
-  if (res !== FileSysRes.ERROR && !isRefresh) {
+  if (res && !isRefresh) {
     all = JSON.parse(res);
   } else {
     all = await saveNodeVersionListToJSON();

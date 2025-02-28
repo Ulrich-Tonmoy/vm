@@ -3,10 +3,6 @@ import { atom } from "jotai";
 import { nodeAtom } from "./config";
 
 export const nodeAllVersionAtom = atom<NodeVersionListModel[] | []>([]);
-export const nodeLtsVersionAtom = atom<NodeVersionListModel[] | []>([]);
-export const nodeCurrentVersionAtom = atom<NodeVersionListModel[] | []>([]);
-export const nodeStableVersionAtom = atom<NodeVersionListModel[] | []>([]);
-export const nodeUnStableVersionAtom = atom<NodeVersionListModel[] | []>([]);
 
 export const loadNodeVersionAtom = atom(
   null,
