@@ -30,6 +30,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/libs";
 import { Pagination } from "./Pagination";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { UpdateIcon } from "@radix-ui/react-icons";
+import { useSetAtom } from "jotai";
+import { loadNodeVersionAtom } from "@/store";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -40,6 +49,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -67,6 +77,10 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const refreshList = async () => {
+    await loadNodeVersion(true);
+  };
+
   return (
     <div>
       <div className="flex items-center py-4">
@@ -78,6 +92,24 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <div className="ml-auto">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button
+                  variant="outline"
+                  className="cursor-pointer"
+                  onClick={refreshList}
+                >
+                  <UpdateIcon className="hover:animate-spin" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Refresh List</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
