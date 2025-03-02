@@ -1,7 +1,7 @@
 import { Table } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { cn } from "@/libs";
+import { cn } from "@/libs/utils/utils";
 
 interface PaginationProps<TData> {
   table: Table<TData>;
@@ -40,7 +40,7 @@ export const Pagination = <TData,>({ table }: PaginationProps<TData>) => {
                   size="sm"
                   className={cn(
                     "h-8 w-8 p-0 cursor-pointer",
-                    isCurrent && "pointer-events-none",
+                    isCurrent && "pointer-events-none"
                   )}
                   onClick={() => table.setPageIndex(pageNumber - 1)}
                 >
@@ -60,7 +60,7 @@ export const Pagination = <TData,>({ table }: PaginationProps<TData>) => {
             }
 
             return null;
-          },
+          }
         )}
       </div>
       <Button

@@ -1,8 +1,8 @@
 import { DataTable } from "./DataTable";
 import { useEffect } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { loadNodeVersionAtom, nodeAllVersionAtom } from "@/store";
 import { Column } from "@/components/TableView/Column";
+import { loadNodeVersionAtom, nodeAllVersionAtom } from "@/libs/store/node";
 
 export default function TableView() {
   const loadNodeVersion = useSetAtom(loadNodeVersionAtom);

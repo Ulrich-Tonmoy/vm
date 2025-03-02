@@ -8,33 +8,30 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import {
-  dataDirPath,
-  deleteFolder,
-  NODE_DOWNLOAD_URL,
-  NODE_INSTALLED_PATH,
-  NODE_UNZIP_FOLDER_NAME,
-  NodeVersionListModel,
-  removeFromPath,
-  setToPath,
-  showToaster,
-  ToasterType,
-} from "@/libs";
 import { useAtomValue, useSetAtom } from "jotai";
-import {
-  downloadingProgressAtom,
-  downloadingVersionAtom,
-  loadNodeVersionAtom,
-  nodeAtom,
-  toastIdAtom,
-  updateConfigAtom,
-  updateDownloadingAtom,
-} from "@/store";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { useEffect } from "react";
 import { ColumnFilter } from "./ColumnFilter";
 import { ask } from "@tauri-apps/plugin-dialog";
+import { NodeVersionListModel } from "@/libs/models/node-version";
+import {
+  downloadingProgressAtom,
+  downloadingVersionAtom,
+  toastIdAtom,
+  updateDownloadingAtom,
+} from "@/libs/store/app";
+import { loadNodeVersionAtom } from "@/libs/store/node";
+import { nodeAtom, updateConfigAtom } from "@/libs/store/config";
+import {
+  NODE_DOWNLOAD_URL,
+  NODE_INSTALLED_PATH,
+  NODE_UNZIP_FOLDER_NAME,
+} from "@/libs/constants/url";
+import { dataDirPath, deleteFolder } from "@/libs/utils/fs";
+import { showToaster } from "@/libs/utils/toaster";
+import { ToasterType } from "@/libs/enums/toaster-type";
+import { removeFromPath, setToPath } from "@/libs/utils/win-path";
 
 export const Column: ColumnDef<NodeVersionListModel>[] = [
   {
@@ -126,10 +123,10 @@ export const Column: ColumnDef<NodeVersionListModel>[] = [
               { type: ToasterType.UPDATE, id: toastId },
               {
                 render: `Downloading ${downloadingVersion} - ${downloadingProgress.toFixed(
-                  2,
+                  2
                 )}%`,
                 isLoading: true,
-              },
+              }
             );
           }
 
@@ -140,7 +137,7 @@ export const Column: ColumnDef<NodeVersionListModel>[] = [
                 render: `Installed Node ${downloadingVersion}`,
                 type: "success",
                 isLoading: false,
-              },
+              }
             );
             updateConfig({
               Node: {
@@ -207,7 +204,7 @@ export const Column: ColumnDef<NodeVersionListModel>[] = [
           {
             title: `Are you sure you want to delete '${row.original.version}'?`,
             kind: "warning",
-          },
+          }
         );
 
         if (!confirmed) return false;
@@ -215,7 +212,9 @@ export const Column: ColumnDef<NodeVersionListModel>[] = [
         const path = await dataDirPath();
         const res = await deleteFolder(NODE_INSTALLED_PATH(path, row.original.version));
         if (res) {
-          const newTools = node.installed.filter((v) => v !== row.original.version);
+          const newTools = node.installed.filter(
+            (v: string) => v !== row.original.version
+          );
           updateConfig({
             Node: {
               active: node.active,

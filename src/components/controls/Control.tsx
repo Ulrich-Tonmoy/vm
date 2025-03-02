@@ -6,8 +6,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { CopyIcon, Cross1Icon, MinusIcon, SquareIcon } from "@radix-ui/react-icons";
-import { Settings } from "./settings";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { Settings } from "@/components/controls/settings/Settings";
 
 export const Control = () => {
   const appWindow = getCurrentWindow();

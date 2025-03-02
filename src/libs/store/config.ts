@@ -1,13 +1,7 @@
-import {
-  CONFIG_FILE_NAME,
-  ConfigNodeModel,
-  ConfigModel,
-  dataDirPath,
-  INITIAL_CONFIG,
-  readFile,
-  StoreConfigModel,
-  writeFile,
-} from "@/libs";
+
+import { CONFIG_FILE_NAME, INITIAL_CONFIG } from "@/libs/constants/config";
+import { ConfigModel, ConfigNodeModel, StoreConfigModel } from "@/libs/models/config";
+import { dataDirPath, readFile, writeFile } from "@/libs/utils/fs";
 import { atom } from "jotai";
 
 export const configAtom = atom<ConfigModel>(INITIAL_CONFIG);

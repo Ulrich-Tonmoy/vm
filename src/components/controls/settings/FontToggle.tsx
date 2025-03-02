@@ -7,8 +7,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { fontFamilyList } from "@/libs";
-import { fontFamilyAtom, updateConfigAtom } from "@/store";
+import { fontFamilyList } from "@/libs/constants/font-list";
+import { fontFamilyAtom, updateConfigAtom } from "@/libs/store/config";
 import { FontFamilyIcon } from "@radix-ui/react-icons";
 import { useAtomValue, useSetAtom } from "jotai";
 

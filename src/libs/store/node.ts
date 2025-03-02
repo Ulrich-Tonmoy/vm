@@ -1,6 +1,8 @@
-import { NodeVersionListModel, isUnstable, loadNodeVersionList } from "@/libs";
 import { atom } from "jotai";
 import { nodeAtom } from "./config";
+import { NodeVersionListModel } from "@/libs/models/node-version";
+import { loadNodeVersionList } from "@/libs/utils/load-node-version-list";
+import { isUnstable } from "@/libs/utils/node-filter";
 
 export const nodeAllVersionAtom = atom<NodeVersionListModel[] | []>([]);
 

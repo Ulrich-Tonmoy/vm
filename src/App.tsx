@@ -1,12 +1,12 @@
-import { Control } from "@/components";
 import { useAtomValue, useSetAtom } from "jotai";
-import { fontFamilyAtom, loadConfigAtom } from "@/store";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ThemeProvider } from "@/components";
-import { cn } from "@/libs";
 import TableView from "@/components/TableView/TableView";
+import { ThemeProvider } from "@/components/controls/settings/theme-toggle/ThemeProvider";
+import { Control } from "@/components/controls/Control";
+import { cn } from "@/libs/utils/utils";
+import { fontFamilyAtom, loadConfigAtom } from "@/libs/store/config";
 
 function App() {
   const loadConfig = useSetAtom(loadConfigAtom);
@@ -20,7 +20,7 @@ function App() {
     <main
       className={cn(
         "h-screen overflow-auto antialiased select-none text-foreground rounded-lg bg-background",
-        fontFamily,
+        fontFamily
       )}
     >
       <ThemeProvider defaultTheme="system">

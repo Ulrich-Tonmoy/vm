@@ -1,4 +1,3 @@
-import { CONFIG_FOLDER_NAME } from "@/libs";
 import {
   mkdir,
   exists,
@@ -10,6 +9,7 @@ import {
 import { ask } from "@tauri-apps/plugin-dialog";
 import { basename } from "@tauri-apps/api/path";
 import { dataDir } from "@tauri-apps/api/path";
+import { CONFIG_FOLDER_NAME } from "@/libs/constants/config";
 
 export const dataDirPath = async () => {
   return (await dataDir()) + "/" + CONFIG_FOLDER_NAME;

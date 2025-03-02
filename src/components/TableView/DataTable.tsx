@@ -28,7 +28,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/libs";
 import { Pagination } from "./Pagination";
 import {
   Tooltip,
@@ -38,7 +37,8 @@ import {
 } from "@/components/ui/tooltip";
 import { UpdateIcon } from "@radix-ui/react-icons";
 import { useSetAtom } from "jotai";
-import { loadNodeVersionAtom } from "@/store";
+import { loadNodeVersionAtom } from "@/libs/store/node";
+import { cn } from "@/libs/utils/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -140,7 +140,7 @@ export function DataTable<TData, TValue>({
           {table.getState().pagination.pageIndex * PAGE_SIZE + 1}-
           {Math.min(
             (table.getState().pagination.pageIndex + 1) * PAGE_SIZE,
-            table.getFilteredRowModel().rows.length,
+            table.getFilteredRowModel().rows.length
           )}{" "}
           of {table.getFilteredRowModel().rows.length} items
         </div>
@@ -177,7 +177,7 @@ export function DataTable<TData, TValue>({
                           cell.column.id === "status" &&
                             (row.original as any).status === "Active"
                             ? "text-green-400 bg-green-400/20 p-2 rounded-md"
-                            : "",
+                            : ""
                         )}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
