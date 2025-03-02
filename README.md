@@ -19,6 +19,7 @@
 - [x] Search by version, sort and filter by version, release date, npm & v8 version, type (LTS, Current, Stable, Unstable) and status (Active, Installed).
 - [x] Simultaneously download and install multiple Node.js versions, and switch between them with ease.
 - [x] Change theme and font style (dark/light/system theme and monospace fonts such as Argon, Krypton, Neon, Radon, Xenon)
+- [x] Download multiple node version concurrently.
 
 ### Technologies
 
