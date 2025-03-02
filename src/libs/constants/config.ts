@@ -1,4 +1,4 @@
-import { ConfigModel } from "../models";
+import { ConfigModel } from "@/libs/models/config";
 
 export const CONFIG_FOLDER_NAME = "Version Manager";
 export const CONFIG_FILE_NAME = "config.json";

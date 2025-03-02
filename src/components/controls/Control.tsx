@@ -6,8 +6,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { CopyIcon, Cross1Icon, MinusIcon, SquareIcon } from "@radix-ui/react-icons";
-import { Settings } from "./settings";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { Settings } from "@/components/controls/settings/Settings";
 
 export const Control = () => {
   const appWindow = getCurrentWindow();
@@ -31,11 +31,14 @@ export const Control = () => {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 flex items-center justify-between shadow-xs"
+      className="fixed top-0 left-0 right-0 flex items-center justify-between shadow-sm shadow-border bg-background z-50"
       data-tauri-drag-region
     >
       <div className="flex">
-        <span className="pl-1 text-xl font-black flex justify-center items-center">
+        <span
+          className="pl-1 text-xl font-black flex justify-center items-center"
+          data-tauri-drag-region
+        >
           <img src="/node.png" alt="node logo" className="w-8 h-6 pr-2" />
           Node JS Version Manager
         </span>

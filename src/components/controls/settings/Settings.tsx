@@ -14,10 +14,10 @@ import {
 } from "@/components/ui/tooltip";
 import { ArrowRightIcon, GearIcon } from "@radix-ui/react-icons";
 import { FontToggle } from "./FontToggle";
-import { ThemeToggle } from "./theme-toggle";
 import { Label } from "@/components/ui/label";
 import { useAtomValue } from "jotai";
-import { fontFamilyAtom, themeAtom } from "@/store";
+import { ThemeToggle } from "@/components/controls/settings/theme-toggle/ThemeToggle";
+import { fontFamilyAtom, themeAtom } from "@/libs/store/config";
 
 export const Settings = () => {
   const theme = useAtomValue(themeAtom);

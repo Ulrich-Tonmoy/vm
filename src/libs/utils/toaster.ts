@@ -1,6 +1,6 @@
+import { ToasterType } from "@/libs/enums/toaster-type";
+import { ToasterParam } from "@/libs/models/toaster";
 import { Bounce, toast, ToastOptions } from "react-toastify";
-import { ToasterType } from "../enums/toaster-type";
-import { ToasterParam } from "../models";
 
 interface ToastAllOptions extends ToastOptions {
   render: string;

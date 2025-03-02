@@ -1,4 +1,4 @@
-import { NodeVersionListModel } from "@/libs/models";
+import { NodeVersionListModel } from "@/libs/models/node-version";
 
 export const parseVersion = (
   versionStr: string,
@@ -18,8 +18,10 @@ export const isLTS = (element: NodeVersionListModel): boolean => {
   const lts = element.lts;
   switch (typeof lts) {
     case "boolean":
+      element.type = lts ? "LTS" : undefined;
       return lts;
     case "string":
+      element.type = "LTS";
       return true;
     default:
       return false;
@@ -47,6 +49,7 @@ export const isCurrent = (element: NodeVersionListModel): boolean => {
   ) {
     return false;
   }
+  element.type = "Current";
 
   return true;
 };
@@ -65,6 +68,8 @@ export const isStable = (element: NodeVersionListModel): boolean => {
     return false;
   }
 
+  element.type = version.minor % 2 === 0 ? "Stable" : undefined;
+
   return version.minor % 2 === 0;
 };
 
@@ -81,6 +86,8 @@ export const isUnstable = (element: NodeVersionListModel): boolean => {
   if (version.major !== 0) {
     return false;
   }
+
+  element.type = version.minor % 2 !== 0 ? "Unstable" : undefined;
 
   return version.minor % 2 !== 0;
 };

@@ -1,4 +1,4 @@
-import { ToasterType } from "../enums";
+import { ToasterType } from "@/libs/enums/toaster-type";
 
 export interface PromiseToasterParam {
   type: ToasterType.PROMISE;

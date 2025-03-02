@@ -4860,7 +4860,7 @@ checksum = "852e951cb7832cb45cb1169900d19760cfa39b82bc0ea9c0e5a14ae88411c98b"
 
 [[package]]
 name = "version-manager"
-version = "0.0.3"
+version = "0.0.4"
 dependencies = [
  "reqwest",
  "serde",

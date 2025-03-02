@@ -1,3 +1,10 @@
+### 0.0.4:
+
+- [x] Migrate from Tailwind css v3 to v4.
+- [x] Upgrade deps to latest and fix window resizing.
+- [x] Updated UI from flat name to table with more info and sorting.
+- [x] Download multiple node version concurrently.
+
 ### 0.0.3:
 
 - [x] Cleanup unused code and resources.

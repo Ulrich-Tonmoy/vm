@@ -1,4 +1,4 @@
-import { themeAtom, updateConfigAtom } from "@/store";
+import { themeAtom, updateConfigAtom } from "@/libs/store/config";
 import { useAtomValue, useSetAtom } from "jotai";
 import { createContext, useContext, useEffect } from "react";
 
