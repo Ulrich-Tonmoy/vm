@@ -34,6 +34,7 @@ export const ColumnFilter = <TData,>({
         <DropdownMenuCheckboxItem
           className="cursor-pointer"
           checked={column.getIsSorted() === "asc"}
+          onSelect={(e) => e.preventDefault()}
           onCheckedChange={() => column.toggleSorting(false)}
         >
           Ascending
@@ -41,6 +42,7 @@ export const ColumnFilter = <TData,>({
         <DropdownMenuCheckboxItem
           className="cursor-pointer"
           checked={column.getIsSorted() === "desc"}
+          onSelect={(e) => e.preventDefault()}
           onCheckedChange={() => column.toggleSorting(true)}
         >
           Descending
@@ -58,6 +60,7 @@ export const ColumnFilter = <TData,>({
                     ? (column?.getFilterValue() as string[])?.includes(value)
                     : false
                 }
+                onSelect={(e) => e.preventDefault()}
                 onCheckedChange={(checked) => {
                   const currentFilters = Array.isArray(column?.getFilterValue())
                     ? (column?.getFilterValue() as string[])
