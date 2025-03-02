@@ -1,4 +1,5 @@
 use reqwest::Client;
+use std::collections::HashMap;
 use std::fs::{File, OpenOptions};
 use std::io::Write;
 use std::sync::{Arc, Mutex};
@@ -8,7 +9,7 @@ use tauri::{Emitter, Manager};
 use tokio::fs;
 use zip::read::ZipArchive;
 
-pub struct ProgressState(pub Arc<Mutex<f32>>);
+pub struct DownloadState(pub Arc<Mutex<HashMap<String, f32>>>);
 
 #[tauri::command]
 pub async fn download_and_unzip<R: tauri::Runtime>(
@@ -17,10 +18,15 @@ pub async fn download_and_unzip<R: tauri::Runtime>(
     dest: String,
     old_name: String,
     new_name: String,
-    state: State<'_, ProgressState>, // State containing Arc<Mutex<f32>>
+    state: State<'_, DownloadState>,
 ) -> Result<(), String> {
-    let progress_arc = state.0.clone(); // Clone the Arc for use in async task
-    let (tx, mut rx) = channel::<f32>(100);
+    let progress_arc = state.0.clone();
+    {
+        let mut progress_map = progress_arc.lock().unwrap();
+        progress_map.insert(new_name.clone(), 0.0);
+    }
+
+    let (tx, mut rx) = channel::<(String, f32)>(100);
 
     // Ensure the destination directory exists
     if !std::path::Path::new(&dest).exists() {
@@ -48,11 +54,11 @@ pub async fn download_and_unzip<R: tauri::Runtime>(
 
             let progress = downloaded / total_size * 100.0;
             {
-                let mut progress_lock = progress_arc.lock().unwrap(); // Use cloned Arc
-                *progress_lock = progress; // Update the progress in the state
+                let mut progress_map = progress_arc.lock().unwrap();
+                progress_map.insert(new_name.clone(), progress);
             }
 
-            tx.send(progress).await.unwrap();
+            tx.send((new_name.clone(), progress)).await.unwrap();
         }
 
         let file = File::open(&zip_path).map_err(|e| e.to_string()).unwrap();
@@ -115,9 +121,11 @@ pub async fn download_and_unzip<R: tauri::Runtime>(
     });
 
     tauri::async_runtime::spawn(async move {
-        while let Some(progress) = rx.recv().await {
+        while let Some((version, progress)) = rx.recv().await {
             let window = app_handle.get_webview_window("main").unwrap();
-            window.emit("download_progress", progress).unwrap();
+            window
+                .emit("download_progress", (version, progress))
+                .unwrap();
         }
     });
 

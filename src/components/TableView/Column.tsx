@@ -16,14 +16,6 @@ import { ColumnFilter } from "./ColumnFilter";
 import { ask } from "@tauri-apps/plugin-dialog";
 import { NodeVersionListModel } from "@/libs/models/node-version";
 import {
-  downloadingProgressAtom,
-  downloadingVersionAtom,
-  toastIdAtom,
-  updateDownloadingAtom,
-} from "@/libs/store/app";
-import { loadNodeVersionAtom } from "@/libs/store/node";
-import { nodeAtom, updateConfigAtom } from "@/libs/store/config";
-import {
   NODE_DOWNLOAD_URL,
   NODE_INSTALLED_PATH,
   NODE_UNZIP_FOLDER_NAME,
@@ -32,7 +24,11 @@ import { dataDirPath, deleteFolder } from "@/libs/utils/fs";
 import { showToaster } from "@/libs/utils/toaster";
 import { ToasterType } from "@/libs/enums/toaster-type";
 import { removeFromPath, setToPath } from "@/libs/utils/win-path";
+import { downloadingStatusAtom, updateDownloadingStatusAtom } from "@/libs/store/app";
+import { loadNodeVersionAtom } from "@/libs/store/node";
+import { nodeAtom, updateConfigAtom } from "@/libs/store/config";
 
+// Update the Column component
 export const Column: ColumnDef<NodeVersionListModel>[] = [
   {
     accessorKey: "version",
@@ -89,11 +85,9 @@ export const Column: ColumnDef<NodeVersionListModel>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const downloadingVersion = useAtomValue(downloadingVersionAtom);
+      const downloadingStatus = useAtomValue(downloadingStatusAtom);
+      const updateDownloadingStatus = useSetAtom(updateDownloadingStatusAtom);
       const loadNodeVersion = useSetAtom(loadNodeVersionAtom);
-      const toastId = useAtomValue(toastIdAtom);
-      const downloadingProgress = useAtomValue(downloadingProgressAtom);
-      const updateDownloading = useSetAtom(updateDownloadingAtom);
       const node = useAtomValue(nodeAtom);
       const updateConfig = useSetAtom(updateConfigAtom);
 
@@ -103,58 +97,66 @@ export const Column: ColumnDef<NodeVersionListModel>[] = [
         const url = NODE_DOWNLOAD_URL(newName);
         const dest = await dataDirPath();
         await invoke("download_and_unzip", { url, dest, oldName, newName });
-        updateDownloading({ version: row.original.version });
+        updateDownloadingStatus({ version: newName, progress: 0 });
       };
 
       const onClickDownload = async () => {
-        if (downloadingVersion !== "") return;
+        const version = row.original.version;
+        if (downloadingStatus[version]) return;
+
         downloadFile();
         const id = showToaster({
           type: ToasterType.LOADING,
-          msg: `Downloading ${downloadingVersion} - ${downloadingProgress.toFixed(2)}%`,
+          msg: `Downloading ${version} - 0%`,
         });
-        updateDownloading({ toastId: id as number });
+        updateDownloadingStatus({ version, toastId: id as number });
       };
 
       useEffect(() => {
-        if (downloadingVersion === row.original.version) {
-          if (downloadingProgress > 1 && downloadingProgress < 100) {
-            showToaster(
-              { type: ToasterType.UPDATE, id: toastId },
-              {
-                render: `Downloading ${downloadingVersion} - ${downloadingProgress.toFixed(
-                  2
-                )}%`,
-                isLoading: true,
-              }
-            );
-          }
+        const version = row.original.version;
+        const status = downloadingStatus[version];
+        if (!status) return;
 
-          if (downloadingProgress >= 100) {
-            showToaster(
-              { type: ToasterType.UPDATE, id: toastId },
-              {
-                render: `Installed Node ${downloadingVersion}`,
-                type: "success",
-                isLoading: false,
-              }
-            );
-            updateConfig({
-              Node: {
-                active: node.active,
-                installed: [...node.installed, downloadingVersion],
-              },
-            });
-
-            loadNodeVersion(false);
-            updateDownloading({ version: row.original.version, toastId: 0, progress: 0 });
-          }
+        if (status.progress > 1 && status.progress < 100) {
+          showToaster(
+            { type: ToasterType.UPDATE, id: status.toastId },
+            {
+              render: `Downloading ${version} - ${status.progress.toFixed(2)}%`,
+              isLoading: true,
+            }
+          );
         }
-      }, [downloadingProgress]);
+
+        if (status.progress >= 100) {
+          showToaster(
+            { type: ToasterType.UPDATE, id: status.toastId },
+            {
+              render: `Installed Node ${version}`,
+              type: "success",
+              isLoading: false,
+            }
+          );
+          updateConfig({
+            Node: {
+              active: node.active,
+              installed: [...node.installed, version],
+            },
+          });
+
+          loadNodeVersion(false);
+          // Clear the download status
+          updateDownloadingStatus({
+            version,
+            progress: 0,
+            toastId: 0,
+          });
+        }
+      }, [downloadingStatus[row.original.version]?.progress]);
 
       useEffect(() => {
-        const listenProgress = listen("download_progress", (event) => {
-          updateDownloading({ progress: event.payload as number });
+        const listenProgress = listen<[string, number]>("download_progress", (event) => {
+          const [version, progress] = event.payload;
+          updateDownloadingStatus({ version, progress });
         });
 
         return () => {

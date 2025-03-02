@@ -1,21 +1,15 @@
+import { DownloadStatus } from "@/libs/models/app";
 import { atom } from "jotai";
 
-export const downloadingVersionAtom = atom<string>("");
-export const toastIdAtom = atom<number>(0);
-export const downloadingProgressAtom = atom<number>(0);
-
-export const updateDownloadingAtom = atom(
+export const downloadingStatusAtom = atom<Record<string, DownloadStatus>>({});
+export const updateDownloadingStatusAtom = atom(
   null,
-  async (get, set, item: { version?: string; toastId?: number; progress?: number }) => {
-    if (item.version) {
-      const downloadingVersion = get(downloadingVersionAtom);
-      if (downloadingVersion.includes(item.version)) {
-        set(downloadingVersionAtom, "");
-        return;
-      }
-      set(downloadingVersionAtom, item.version);
-    }
-    if (item.toastId || item.toastId === 0) set(toastIdAtom, item.toastId);
-    if (item.progress || item.progress === 0) set(downloadingProgressAtom, item.progress);
-  },
+  (get, set, update: Partial<DownloadStatus> & { version: string }) => {
+    const current = get(downloadingStatusAtom);
+    const { version, ...rest } = update;
+    set(downloadingStatusAtom, {
+      ...current,
+      [version]: { ...current[version], ...rest, version },
+    });
+  }
 );
